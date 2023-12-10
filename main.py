@@ -2,20 +2,29 @@ import pandas as pd
 import preprocessing
 import tables
 
+#initializing the register file
+register_file= tables.RegisterFile()
+
+#intializing the instruction table
+instruction_table=preprocessing.get_instruction_queue("program.txt")
+instruction_table=tables.InstructionsTable(instruction_table)
+
 #initializing the reservation stations
-load_unit_1= tables.FunctionalUnit("Load1")
-load_unit_2= tables.FunctionalUnit("Load2")
-add_unit_1= tables.FunctionalUnit("Add1")
-add_unit_2= tables.FunctionalUnit("Add2")
-add_unit_3= tables.FunctionalUnit("Add3")
-div_unit= tables.FunctionalUnit("Div")
-store_unit_1= tables.FunctionalUnit("Store1")
-store_unit_2= tables.FunctionalUnit("Store2")
-bne_unit= tables.FunctionalUnit("BNE")
-nand_unit= tables.FunctionalUnit("Nand")
-call_return_unit= tables.FunctionalUnit("Call/Ret")
+load_unit_1= tables.FunctionalUnit("Load1", register_file)
+load_unit_2= tables.FunctionalUnit("Load2", register_file)
+add_unit_1= tables.FunctionalUnit("Add1", register_file)
+add_unit_2= tables.FunctionalUnit("Add2", register_file)
+add_unit_3= tables.FunctionalUnit("Add3", register_file)
+div_unit= tables.FunctionalUnit("Div", register_file)
+store_unit_1= tables.FunctionalUnit("Store1", register_file)
+store_unit_2= tables.FunctionalUnit("Store2", register_file)
+bne_unit= tables.FunctionalUnit("BNE", register_file)
+nand_unit= tables.FunctionalUnit("Nand", register_file)
+call_return_unit= tables.FunctionalUnit("Call/Ret", register_file)
 functional_units= [load_unit_1,load_unit_2,add_unit_1,add_unit_2,add_unit_3,div_unit,store_unit_1,store_unit_2,bne_unit,nand_unit,call_return_unit]
+
 #maps instruction type to functional units. Each key resembles a reservation station
+#(ADD and ADDI share the same reservation station) (RET and CALL share the same reservation station)
 Reservation_stations= {
     "LOAD": [load_unit_1,load_unit_2],
     "ADD": [add_unit_1,add_unit_2,add_unit_3],
@@ -40,9 +49,7 @@ functional_unit_to_instruction_map= {
     nand_unit: None,
     call_return_unit: None
 }
-#intializing the instruction table
-instruction_table=preprocessing.get_instruction_queue("program.txt")
-instruction_table=tables.InstructionsTable(instruction_table)
+
 
 issue_index=0
 clock=0
@@ -87,3 +94,4 @@ while not instruction_table.df["Write Result"].all():
     if(clock==10):
         break
 print("Instructions issued: ", instruction_table.get_instructions_issued())
+register_file.print_table()

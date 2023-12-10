@@ -10,19 +10,31 @@ Register_status= {
     "r6": None,
     "r7": None,
 }
-Register_values= {
-    "R0": 0,
-    "R1": 1,
-    "R2": 2,
-    "R3": 3,
-    "R4": 4,
-    "R5": 5,
-    "R6": 6,
-    "R7": 7,
-}
+class RegisterFile:
+    Register_values= {
+        "R0": 0,
+        "R1": 1,
+        "R2": 2,
+        "R3": 3,
+        "R4": 4,
+        "R5": 5,
+        "R6": 6,
+        "R7": 7,
+    }
+    def __init__(self):
+        for i in self.Register_values:
+            self.Register_values[i]=0
+    def get_value(self, register):
+        return self.Register_values[register]
+    def set_value(self, register, value):
+        self.Register_values[register]=value
+    def print_table(self):
+        print(tabulate(self.Register_values.items(), headers=['Register', 'Value'], tablefmt='pretty'))
+    
 
 class FunctionalUnit:
-    def __init__(self, name):
+    def __init__(self, name, register_file):
+        self.register_file=register_file
         reservation_station = {
             "Execution Cycles left": None,
             "Name": name,
@@ -65,7 +77,7 @@ class FunctionalUnit:
             Register_status[ra]=self.name
             rB = operands[1].split("(")[1].replace(")", "")
             if Register_status[rB] == None:
-                self.df["Vj"] = Register_values[rB]
+                self.df["Vj"] = self.register_file.Register_values[rB]
             else:
                 self.df["Qj"] = Register_status[rB]
         #STORE rA, offset(rB)
@@ -77,11 +89,11 @@ class FunctionalUnit:
             #Register_status[ra]=self.name
             rB = operands[1].split("(")[1].replace(")", "")
             if Register_status[rB] == None:
-                self.df["Vj"] = Register_values[rB]
+                self.df["Vj"] = self.register_file.Register_values[rB]
             else:
                 self.df["Qj"] = Register_status[rB]
             if Register_status[ra] == None:
-                self.df["Vk"] = Register_values[ra]
+                self.df["Vk"] = self.register_file.Register_values[ra]
             else:
                 self.df["Qk"] = Register_status[ra]
         #"ADD rA, rB, rC"
