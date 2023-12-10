@@ -8,8 +8,9 @@ def read_program(file_path):
 def read_data():
     # TODO: Implement the logic to read the data
     pass
-def get_instruction_queue():
-    instructions = read_program("program.txt")
+def get_instruction_queue(file_path):
+    instructions = read_program(file_path)
+    print(instructions)
     operations = []
     for instruction in instructions:
         words = instruction.split()
@@ -19,9 +20,9 @@ def get_instruction_queue():
     instructions_queue = {
         "Operation": operations,
         "Instruction": instructions,
-        "Issue": [None for i in range(len(instructions))],
-        "Execute": [None for i in range(len(instructions))],
-        "Write Result": [None for i in range(len(instructions))]
+        "Issue": [False for i in range(len(instructions))],
+        "Execute": [False for i in range(len(instructions))],
+        "Write Result": [False for i in range(len(instructions))]
     }
     instructions_queue = pd.DataFrame(instructions_queue)
     return instructions_queue

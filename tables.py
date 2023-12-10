@@ -1,4 +1,5 @@
 import pandas as pd
+from tabulate import tabulate
 Register_status= {
     "R0": None,
     "R1": None,
@@ -12,7 +13,7 @@ Register_status= {
 Register_values= {
     "R0": 0,
     "R1": 0,
-    "R2": 0,
+    "R2": 5,
     "R3": 0,
     "R4": 0,
     "R5": 0,
@@ -25,7 +26,7 @@ class FunctionalUnit:
         reservation_station = {
             "Execution Cycles left": None,
             "Name": name,
-            "Busy": None,
+            "Busy": False,
             "Op": None,
             "Vj": None,
             "Vk": None,
@@ -34,25 +35,29 @@ class FunctionalUnit:
             "A": None    
         }
         cycles= {
-            "Load": 3,
-            "Store": 3,
-            "Add": 2,
+            "Load1": 3,
+            "Load2": 3,
+            "Store1": 3,
+            "Store2": 3,
+            "Add1": 2,
+            "Add2": 2,
+            "Add3": 2,
             "Div": 10,
             "BNE": 1,
             "Nand": 1,
-            "Call": 1,
+            "Call/Ret": 1,
         }
-        self.df = pd.DataFrame(reservation_station)
+        self.df = pd.DataFrame([reservation_station])
         self.name=name
         self.cycles_needed=cycles[name]
     def can_issue(self):
-        return self.df["Busy"]==False
+        return (self.df["Busy"]==False).all()
     def issue_instr(self, instruction):
         self.df["Busy"] = True
         self.df["Op"] = instruction.split()[0]
         self.df["Execution Cycles left"] = self.cycles_needed
         # "Load rA, offset(rB)"
-        if self.df["Op"] == "Load":
+        if (self.df["Op"] == "Load").all():
             operands = instruction.split()[1:]
             offset = operands[1].split("(")[0]
             self.df["A"] = offset
@@ -64,7 +69,7 @@ class FunctionalUnit:
             else:
                 self.df["Qj"] = Register_status[rB]
         #STORE rA, offset(rB)
-        if self.dp["Op"] == "Store":
+        if (self.df["Op"] == "Store").all():
             operands = instruction.split()[1:]
             offset = operands[1].split("(")[0]
             self.df["A"] = offset
@@ -80,7 +85,7 @@ class FunctionalUnit:
             else:
                 self.df["Qk"] = Register_status[ra]
         #"ADD rA, rB, rC"
-        if self.df["Op"] == "Add" or self.df["Op"] == "Div" or self.df["Op"] == "Nand":
+        if (self.df["Op"] == "Add").all() or (self.df["Op"] == "Div").all() or (self.df["Op"] == "Nand").all():
             operands = instruction.split()[1:]
             rA = operands.split(",")[0]
             rB = operands.split(",")[1]
@@ -95,7 +100,7 @@ class FunctionalUnit:
             else:
                 self.df["Qk"] = Register_status[rC]
         #BNE rA, rB, offset
-        if self.df["Op"] == "BNE":
+        if (self.df["Op"] == "BNE").all():
             operands = instruction.split()[1:]
             rA = operands.split(",")[0]
             rB = operands.split(",")[1]
@@ -110,32 +115,34 @@ class FunctionalUnit:
             else:
                 self.df["Qk"] = Register_status[rB]
         #Call label
-        if self.df["Op"] == "Call":
+        if (self.df["Op"] == "Call").all():
             #TODO: implement the logic to issue Call instruction
             pass
         #RET
-        if self.df["Op"] == "Return":
+        if (self.df["Op"] == "Return").all():
             #TODO: implement the logic to issue return instruction
             pass
     def execute(self):
-        if(self.df["Execution Cycles left"]!=0):
+        if(self.df["Execution Cycles left"]!=0).all():
             self.df["Execution Cycles left"]-=1
-        if (self.df["Execution Cycles left"]==0):
-            #TODO: update register status
-            pass
-        return self.df["Execution Cycles left"]==0
+        return (self.df["Execution Cycles left"]==0).all()
     def write_result(self):
-        if(self.df["Execution Cycles left"]==0):
-            self.df["Execution Cycles left"]=None
-            self.df["Busy"]=False
-            self.df["Op"]=None
-            self.df["Vj"]=None
-            self.df["Vk"]=None
-            self.df["Qj"]=None
-            self.df["Qk"]=None
-            self.df["A"]=None
+        self.df["Execution Cycles left"]=None
+        self.df["Busy"]=False
+        self.df["Op"]=None
+        self.df["Vj"]=None
+        self.df["Vk"]=None
+        self.df["Qj"]=None
+        self.df["Qk"]=None
+        self.df["A"]=None
+        #update register status
+        for i in Register_status:
+            if Register_status[i]==self.name:
+                Register_status[i]=None
     def can_write_result(self):
-        return self.df["Execution Cycles left"]==0
+        return (self.df["Execution Cycles left"]==0).all()
+    def print_table(self):
+        print(tabulate(self.df, headers='keys', tablefmt='pretty'))
 class InstructionsTable:
     # instructions_queue= {
     # "Operation": ["ADD", "ADD", "ADD"],
@@ -151,19 +158,19 @@ class InstructionsTable:
         self.instructions_executed=0
         self.instructions_written=0
     def issue(self):
-        self.df["Issue"][self.issue_index]=True
+        self.df.loc[self.issue_index, "Issue"]=True
         self.issue_index+=1
         self.instructions_issued+=1
     def execute(self, index):
-        self.df["Execute"][index]=True
+        self.df.loc[index,"Execute" ]=True
         self.instructions_executed+=1
     def write_result(self,index):
-        self.df["Write Result"][index]=True
-        self.instructions_executed+=1
+        self.df.loc[index,"Write Result"]=True
+        self.instructions_written+=1
     def print_table(self):
-        print(self.df)
+        print(self.df.head())
     def get_table(self):
-        return self.df
+        print(tabulate(self.df, headers='keys', tablefmt='pretty'))
     def get_instructions(self):
         return self.instructions
     def set_instructions(self, instructions):
