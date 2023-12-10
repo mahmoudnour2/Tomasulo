@@ -9,6 +9,16 @@ Register_status= {
     "R6": None,
     "R7": None,
 }
+Register_values= {
+    "R0": 0,
+    "R1": 0,
+    "R2": 0,
+    "R3": 0,
+    "R4": 0,
+    "R5": 0,
+    "R6": 0,
+    "R7": 0,
+}
 
 class FunctionalUnit:
     def __init__(self, name):
@@ -41,35 +51,72 @@ class FunctionalUnit:
         self.df["Busy"] = True
         self.df["Op"] = instruction.split()[0]
         self.df["Execution Cycles left"] = self.cycles_needed
-        
+        # "Load rA, offset(rB)"
         if self.df["Op"] == "Load":
             operands = instruction.split()[1:]
             offset = operands[1].split("(")[0]
-            rB = operands[1].split("(")[1].replace(")", "")
             self.df["A"] = offset
+            ra=operands[0].split(",")[0]
+            Register_status[ra]=self.name
+            rB = operands[1].split("(")[1].replace(")", "")
             if Register_status[rB] == None:
-                self.df["Vj"] = rB
+                self.df["Vj"] = Register_values[rB]
             else:
                 self.df["Qj"] = Register_status[rB]
+        #STORE rA, offset(rB)
         if self.dp["Op"] == "Store":
             operands = instruction.split()[1:]
             offset = operands[1].split("(")[0]
-            rB = operands[1].split("(")[1].replace(")", "")
             self.df["A"] = offset
+            ra=operands[0].split(",")[0]
+            #Register_status[ra]=self.name
+            rB = operands[1].split("(")[1].replace(")", "")
+            if Register_status[rB] == None:
+                self.df["Vj"] = Register_values[rB]
+            else:
+                self.df["Qj"] = Register_status[rB]
+            if Register_status[ra] == None:
+                self.df["Vk"] = Register_values[ra]
+            else:
+                self.df["Qk"] = Register_status[ra]
+        #"ADD rA, rB, rC"
+        if self.df["Op"] == "Add" or self.df["Op"] == "Div" or self.df["Op"] == "Nand":
+            operands = instruction.split()[1:]
+            rA = operands.split(",")[0]
+            rB = operands.split(",")[1]
+            rC=operands.split(",")[2]
+            Register_status[rA]=self.name
             if Register_status[rB] == None:
                 self.df["Vj"] = rB
             else:
                 self.df["Qj"] = Register_status[rB]
-            rA = operands[0]
-            if Register_status[rA] == None:
-                self.df["Vk"] = rA
+            if Register_status[rC] == None:
+                self.df["Vk"] = rC
             else:
-                self.df["Qk"] = Register_status[rA]
-            
-            
-        # TODO: implement the logic to issue other instructions
-        
-        pass
+                self.df["Qk"] = Register_status[rC]
+        #BNE rA, rB, offset
+        if self.df["Op"] == "BNE":
+            operands = instruction.split()[1:]
+            rA = operands.split(",")[0]
+            rB = operands.split(",")[1]
+            offset=operands.split(",")[2]
+            self.df["A"] = offset
+            if Register_status[rA] == None:
+                self.df["Vj"] = rA
+            else:
+                self.df["Qj"] = Register_status[rA]
+            if Register_status[rB] == None:
+                self.df["Vk"] = rB
+            else:
+                self.df["Qk"] = Register_status[rB]
+        #Call label
+        if self.df["Op"] == "Call":
+            #TODO: implement the logic to issue Call instruction
+            pass
+        #RET
+        if self.df["Op"] == "Return":
+            #TODO: implement the logic to issue return instruction
+            pass
     def execute(self):
         if(self.df["Execution Cycles left"]!=0):
             self.df["Execution Cycles left"]-=1

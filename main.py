@@ -46,7 +46,20 @@ instruction_table=preprocessing.read_program()
 instruction_table=tables.InstructionsTable(instruction_table)
 
 issue_index=0
+clock=0
 while not instruction_table.df["Write Result"].all():
+    #write result if possible
+    for i in range(len(functional_units)):
+        if functional_units[i].can_write_result():
+            functional_units[i].write_result()
+            instruction_table.write_result(functional_unit_to_instruction_map[functional_units[i]])#update the instruction table
+
+    #execute instruction if possible
+    for i in range(len(functional_units)):
+        executed=functional_units[i].execute()
+        if(executed):
+            instruction_table.execute(functional_unit_to_instruction_map[functional_units[i]])#update the instruction table
+
     #issue instruction if possible
     instruction_type=instruction_table.df["Operation"][issue_index]
     suitable_functional_units=Reservation_stations[instruction_type]
@@ -56,17 +69,10 @@ while not instruction_table.df["Write Result"].all():
                 the_available_unit=suitable_functional_units[i]
                 break
         the_available_unit.issue_instr(instruction_table["Instruction"].iloc[issue_index])#update reservation station
-        #TODO: update register status
         instruction_table.issue() #update instruction table (instruction table keeps track of issue_index)
+        #register status is updated in the issue_instr function 
         functional_unit_to_instruction_map[the_available_unit]=issue_index
         issue_index+=1
-    #execute instruction if possible
-    for i in range(len(functional_units)):
-        executed=functional_units[i].execute()
-        if(executed):
-            instruction_table.execute(functional_unit_to_instruction_map[functional_units[i]])#update the instruction table
-    #write result if possible
-    for i in range(len(functional_units)):
-        if functional_units[i].can_write_result():
-            functional_units[i].write_result()
-            instruction_table.write_result(functional_unit_to_instruction_map[functional_units[i]])#update the instruction table
+    instruction_table.print_table()
+    clock+=1
+    
