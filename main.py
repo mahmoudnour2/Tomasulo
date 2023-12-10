@@ -12,18 +12,21 @@ instruction_table=components.InstructionsTable(instruction_table)
 #initializing the common data bus
 cdb= components.CommonDataBus()
 
+#initializing the memory
+data_memory= components.Memory()
+
 #initializing the reservation stations
-load_station_1= components.ReservationStation("Load1", register_file, cdb)
-load_station_2= components.ReservationStation("Load2", register_file,cdb)
-add_station_1= components.ReservationStation("Add1", register_file, cdb)
-add_station_2= components.ReservationStation("Add2", register_file, cdb)
-add_station_3= components.ReservationStation("Add3", register_file, cdb)
-div_station= components.ReservationStation("Div", register_file, cdb)
-store_station_1= components.ReservationStation("Store1", register_file, cdb)
-store_station_2= components.ReservationStation("Store2", register_file, cdb)
-bne_station= components.ReservationStation("BNE", register_file, cdb)
-nand_station= components.ReservationStation("Nand", register_file, cdb)
-call_return_station= components.ReservationStation("Call/Ret", register_file, cdb)
+load_station_1= components.ReservationStation("Load1", register_file, cdb,data_memory)
+load_station_2= components.ReservationStation("Load2", register_file,cdb,data_memory)
+add_station_1= components.ReservationStation("Add1", register_file, cdb,data_memory)
+add_station_2= components.ReservationStation("Add2", register_file, cdb,data_memory)
+add_station_3= components.ReservationStation("Add3", register_file, cdb,data_memory)
+div_station= components.ReservationStation("Div", register_file, cdb,data_memory)
+store_station_1= components.ReservationStation("Store1", register_file, cdb,data_memory)
+store_station_2= components.ReservationStation("Store2", register_file, cdb,data_memory)
+bne_station= components.ReservationStation("BNE", register_file, cdb,data_memory)
+nand_station= components.ReservationStation("Nand", register_file, cdb,data_memory)
+call_return_station= components.ReservationStation("Call/Ret", register_file, cdb,data_memory)
 Reservation_stations= [load_station_1,load_station_2,add_station_1,add_station_2,add_station_3,div_station,store_station_1,store_station_2,bne_station,nand_station,call_return_station]
 
 #maps instruction type to its available reservation units.
@@ -52,7 +55,6 @@ reservation_station_to_instruction_map= {
     nand_station: None,
     call_return_station: None
 }
-
 
 issue_index=0
 clock=0
@@ -87,7 +89,7 @@ while not instruction_table.df["Write Result"].all():
             the_available_unit.issue_instr(instruction_to_issue)#update reservation station
             instruction_table.issue() #update instruction table (instruction table keeps track of issue_index)
             #register status is updated in the issue_instr function 
-            reservation_station_to_instruction_map[the_available_unit]=issue_index
+            reservation_station_to_instruction_map[the_available_unit]=issue_index#keep track of which instruction is issued to which reservation station
             issue_index+=1
 
     instruction_table.print_table()
