@@ -10,16 +10,33 @@ Register_status= {
     "r6": None,
     "r7": None,
 }
+class DataMemory:
+    def __init__(self):
+        self.memory = [0] * 65536
+
+    def get_value(self, address):
+        return self.memory[address]
+
+    def set_value(self, address, value):
+        self.memory[address] = value
+
+    def print_table(self):
+        print(tabulate(self.memory.items(), headers=['Address', 'Value'], tablefmt='pretty'))
+    
+    def load_from_data_bus(self,cdb):
+        address=cdb.get_value()
+        self.memory[address]=cdb.get_value()
+
 class RegisterFile:
     Register_values= {
-        "R0": 0,
-        "R1": 1,
-        "R2": 2,
-        "R3": 3,
-        "R4": 4,
-        "R5": 5,
-        "R6": 6,
-        "R7": 7,
+        "r0": 0,
+        "r1": 1,
+        "r2": 2,
+        "r3": 3,
+        "r4": 4,
+        "r5": 5,
+        "r6": 6,
+        "r7": 7,
     }
     def __init__(self):
         for i in self.Register_values:
@@ -30,11 +47,26 @@ class RegisterFile:
         self.Register_values[register]=value
     def print_table(self):
         print(tabulate(self.Register_values.items(), headers=['Register', 'Value'], tablefmt='pretty'))
-    
 
-class FunctionalUnit:
-    def __init__(self, name, register_file):
+class CommonDataBus:
+    def __init__(self):
+        self.value=None
+        self.reservation_station=None
+    def write_value(self, value, reservation_station):
+        self.value=value
+        self.reservation_station=reservation_station
+    def get_value(self):
+        return self.value
+    def get_reservation_station(self):
+        return self.reservation_station
+    def print_table(self):
+        print(tabulate([{"Value": self.value, "Reservation Station": self.reservation_station}], headers='keys', tablefmt='pretty'))
+
+class ReservationStation:
+    def __init__(self, name, register_file,common_data_bus):
         self.register_file=register_file
+        self.common_data_bus=common_data_bus
+        self.result=None
         reservation_station = {
             "Execution Cycles left": None,
             "Name": name,
@@ -104,13 +136,25 @@ class FunctionalUnit:
             rC=operands[0].split(",")[2]
             Register_status[rA]=self.name
             if Register_status[rB] == None:
-                self.df["Vj"] = rB
+                self.df["Vj"] = self.register_file.Register_values[rB]
             else:
                 self.df["Qj"] = Register_status[rB]
             if Register_status[rC] == None:
-                self.df["Vk"] = rC
+                self.df["Vk"] = self.register_file.Register_values[rC]
             else:
                 self.df["Qk"] = Register_status[rC]
+        #"ADDI rA, rB, immediate"
+        if (self.df["Op"] == "ADDI").all():
+            operands = instruction.split()[1:]
+            rA = operands[0].split(",")[0]
+            rB = operands[0].split(",")[1]
+            immediate=operands[0].split(",")[2]
+            Register_status[rA]=self.name
+            if Register_status[rB] == None:
+                self.df["Vj"] = self.register_file.Register_values[rB]
+            else:
+                self.df["Qj"] = Register_status[rB]
+            self.df["Vk"] = immediate 
         #BNE rA, rB, offset
         if (self.df["Op"] == "BNE").all():
             operands = instruction.split()[1:]
@@ -137,8 +181,32 @@ class FunctionalUnit:
     def execute(self):
         if(self.df["Execution Cycles left"]!=0).all():
             self.df["Execution Cycles left"]-=1
+        if(self.df["Execution Cycles left"]==0).all():
+            if (self.df["Op"] == "LOAD").all():
+                self.result=self.df["A"]+self.df["Vj"]
+            if (self.df["Op"] == "STORE").all():
+                self.result=self.df["A"]+self.df["Vj"]
+            if (self.df["Op"] == "ADD").all():
+                self.result=self.df["Vj"]+self.df["Vk"]
+            if (self.df["Op"] == "ADDI").all():
+                self.result=self.df["Vj"]+self.df["Vk"]
+            if (self.df["Op"] == "DIV").all():
+                self.result=self.df["Vj"]//self.df["Vk"]
+            if (self.df["Op"] == "NAND").all():
+                self.result=~(self.df["Vj"]&self.df["Vk"])
+            if (self.df["Op"] == "BNE").all():
+                self.result=self.df["Vj"]-self.df["Vk"]
+            if (self.df["Op"] == "CALL").all():
+                #TODO: implement the logic to execute Call instruction
+                pass
+            if (self.df["Op"] == "RET").all():
+                #TODO: implement the logic to execute return instruction
+                pass
         return (self.df["Execution Cycles left"]==0).all()
     def write_result(self):
+        #update common data bus
+        self.common_data_bus.write_value(self.result,self.df["Op"])
+        #Clear reservation station values for the functional unit
         self.df["Execution Cycles left"]=None
         self.df["Busy"]=False
         self.df["Op"]=None
