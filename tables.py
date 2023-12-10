@@ -1,24 +1,24 @@
 import pandas as pd
 from tabulate import tabulate
 Register_status= {
-    "R0": None,
-    "R1": None,
-    "R2": None,
-    "R3": None,
-    "R4": None,
-    "R5": None,
-    "R6": None,
-    "R7": None,
+    "r0": None,
+    "r1": None,
+    "r2": None,
+    "r3": None,
+    "r4": None,
+    "r5": None,
+    "r6": None,
+    "r7": None,
 }
 Register_values= {
     "R0": 0,
-    "R1": 0,
-    "R2": 5,
-    "R3": 0,
-    "R4": 0,
-    "R5": 0,
-    "R6": 0,
-    "R7": 0,
+    "R1": 1,
+    "R2": 2,
+    "R3": 3,
+    "R4": 4,
+    "R5": 5,
+    "R6": 6,
+    "R7": 7,
 }
 
 class FunctionalUnit:
@@ -57,7 +57,7 @@ class FunctionalUnit:
         self.df["Op"] = instruction.split()[0]
         self.df["Execution Cycles left"] = self.cycles_needed
         # "Load rA, offset(rB)"
-        if (self.df["Op"] == "Load").all():
+        if (self.df["Op"] == "LOAD").all():
             operands = instruction.split()[1:]
             offset = operands[1].split("(")[0]
             self.df["A"] = offset
@@ -69,7 +69,7 @@ class FunctionalUnit:
             else:
                 self.df["Qj"] = Register_status[rB]
         #STORE rA, offset(rB)
-        if (self.df["Op"] == "Store").all():
+        if (self.df["Op"] == "STORE").all():
             operands = instruction.split()[1:]
             offset = operands[1].split("(")[0]
             self.df["A"] = offset
@@ -85,11 +85,11 @@ class FunctionalUnit:
             else:
                 self.df["Qk"] = Register_status[ra]
         #"ADD rA, rB, rC"
-        if (self.df["Op"] == "Add").all() or (self.df["Op"] == "Div").all() or (self.df["Op"] == "Nand").all():
+        if (self.df["Op"] == "ADD").all() or (self.df["Op"] == "DIV").all() or (self.df["Op"] == "NAND").all():
             operands = instruction.split()[1:]
-            rA = operands.split(",")[0]
-            rB = operands.split(",")[1]
-            rC=operands.split(",")[2]
+            rA = operands[0].split(",")[0]
+            rB = operands[0].split(",")[1]
+            rC=operands[0].split(",")[2]
             Register_status[rA]=self.name
             if Register_status[rB] == None:
                 self.df["Vj"] = rB
@@ -115,11 +115,11 @@ class FunctionalUnit:
             else:
                 self.df["Qk"] = Register_status[rB]
         #Call label
-        if (self.df["Op"] == "Call").all():
+        if (self.df["Op"] == "CALL").all():
             #TODO: implement the logic to issue Call instruction
             pass
         #RET
-        if (self.df["Op"] == "Return").all():
+        if (self.df["Op"] == "RET").all():
             #TODO: implement the logic to issue return instruction
             pass
     def execute(self):
@@ -171,8 +171,8 @@ class InstructionsTable:
         print(self.df.head())
     def get_table(self):
         print(tabulate(self.df, headers='keys', tablefmt='pretty'))
-    def get_instructions(self):
-        return self.instructions
+    def get_instruction(self,index):
+        return self.df.loc[index,"Instruction"]
     def set_instructions(self, instructions):
         self.instructions=instructions
     def get_instructions_issued(self):
