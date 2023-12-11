@@ -63,7 +63,7 @@ class CommonDataBus:
         print(tabulate([{"Value": self.value, "Reservation Station": self.reservation_station}], headers='keys', tablefmt='pretty'))
 
 class ReservationStation:
-    def __init__(self, name, register_file,common_data_bus):
+    def __init__(self, name, register_file,common_data_bus,memory):
         self.register_file=register_file
         self.common_data_bus=common_data_bus
         self.memory=memory
