@@ -14,8 +14,10 @@ instruction_table=components.InstructionsTable(instruction_table)
 
 
 #initializing the memory
-
 data_memory= components.DataMemory()
+
+#read data from data file into data memory
+preprocessing.read_data("data.txt",data_memory)
 
 #initializing the reservation stations
 load_station_1= components.ReservationStation("Load1", register_file, cdb,data_memory)

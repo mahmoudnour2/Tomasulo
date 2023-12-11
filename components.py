@@ -33,8 +33,8 @@ class RegisterFile:
     }
     Register_values= {
         "r0": 0,
-        "r1": 1,
-        "r2": 2,
+        "r1": 0,
+        "r2": 0,
         "r3": 0,
         "r4": 0,
         "r5": 0,
@@ -113,7 +113,7 @@ class ReservationStation:
         if (self.df["Op"] == "LOAD").all():
             operands = instruction.split()[1:]
             offset = operands[1].split("(")[0]
-            self.df["A"] = offset
+            self.df["A"] = int(offset)
             ra=operands[0].split(",")[0]
             self.register_file.Register_status[ra]=self.name
             rB = operands[1].split("(")[1].replace(")", "")
@@ -125,7 +125,7 @@ class ReservationStation:
         if (self.df["Op"] == "STORE").all():
             operands = instruction.split()[1:]
             offset = operands[1].split("(")[0]
-            self.df["A"] = offset
+            self.df["A"] = int(offset)
             ra=operands[0].split(",")[0]
             #self.register_file.Register_status[ra]=self.name
             rB = operands[1].split("(")[1].replace(")", "")
@@ -163,14 +163,14 @@ class ReservationStation:
                 self.df["Vj"] = self.register_file.Register_values[rB]
             else:
                 self.df["Qj"] = self.register_file.Register_status[rB]
-            self.df["Vk"] = immediate 
+            self.df["Vk"] = int(immediate) 
         #BNE rA, rB, offset
         if (self.df["Op"] == "BNE").all():
             operands = instruction.split()[1:]
             rA = operands.split(",")[0]
             rB = operands.split(",")[1]
             offset=operands.split(",")[2]
-            self.df["A"] = offset
+            self.df["A"] = int(offset)
             if self.register_file.Register_status[rA] == None:
                 self.df["Vj"] = rA
             else:
@@ -193,7 +193,7 @@ class ReservationStation:
             self.df["Execution Cycles left"]-=1
         if(self.df["Execution Cycles left"]==0).all():
             if (self.df["Op"] == "LOAD").all():
-                address=self.df["A"]
+                address=int(self.df["A"][0])
                 self.result=self.memory.get_value(address)
             if (self.df["Op"] == "STORE").all():
                 self.result=self.df["Vk"]
@@ -213,8 +213,8 @@ class ReservationStation:
             if (self.df["Op"] == "RET").all():
                 #TODO: implement the logic to execute return instruction
                 pass
-        if((self.df["Op"]=="LOAD").all() or (self.df["Op"]=="STORE").all()) and self.df["Execution Cycles left"]==self.cycles_needed-1:
-            self.df["A"]=self.df["A"][0]+self.df["Vj"][0]
+        if((self.df["Op"]=="LOAD").all() or (self.df["Op"]=="STORE").all()) and self.df["Execution Cycles left"][0]==self.cycles_needed-1:
+            self.df["A"]=int(self.df["A"][0]+self.df["Vj"][0])
         return (self.df["Execution Cycles left"]==0).all()
     def write_result(self):
         if (self.df["Op"]=="STORE").all():

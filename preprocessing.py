@@ -5,9 +5,12 @@ def read_program(file_path):
         for line in file:
             lines.append(line.strip())
     return lines
-def read_data():
-    # TODO: Implement the logic to read the data
-    pass
+def read_data(file_path, data_memory):
+    with open(file_path, 'r') as file:
+        for line in file:
+            address= int(line.split(",")[0])
+            value= int(line.split(",")[1])
+            data_memory.set_value(address,value)
 def get_instruction_queue(file_path):
     instructions = read_program(file_path)
     print(instructions)
