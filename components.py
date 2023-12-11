@@ -63,7 +63,7 @@ class CommonDataBus:
         print(tabulate([{"Value": self.value, "Reservation Station": self.reservation_station}], headers='keys', tablefmt='pretty'))
 
 class ReservationStation:
-    def __init__(self, name, register_file,common_data_bus,memory):
+    def __init__(self, name, register_file,common_data_bus):
         self.register_file=register_file
         self.common_data_bus=common_data_bus
         self.memory=memory
@@ -174,6 +174,7 @@ class ReservationStation:
         #Call label
         if (self.df["Op"] == "CALL").all():
             #TODO: implement the logic to issue Call instruction
+            label = instruction.split(" ")[1]
             pass
         #RET
         if (self.df["Op"] == "RET").all():
@@ -198,7 +199,6 @@ class ReservationStation:
                 self.result=~(self.df["Vj"]&self.df["Vk"])
             if (self.df["Op"] == "BNE").all():
                 self.result=self.df["Vj"]-self.df["Vk"]
-                #TODO: implement the logic to execute BNE instruction
             if (self.df["Op"] == "CALL").all():
                 #TODO: implement the logic to execute Call instruction
                 pass
