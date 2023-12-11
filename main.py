@@ -1,7 +1,7 @@
 import pandas as pd
 import preprocessing
 import components
-
+import sys
 #initializing the common data bus
 cdb= components.CommonDataBus()
 
@@ -64,6 +64,7 @@ issue_index = 0
 clock = 1
 while not instruction_table.df["Write Result"].all():
     print("Clock cycle: ", clock)
+    recently_removed_reservation_station=None
     #write result if possible
     indices_of_potential_reservation_stations_to_write=[]
     corresponding_instructions_index=[]
@@ -75,8 +76,11 @@ while not instruction_table.df["Write Result"].all():
         most_prior_instruction = min(corresponding_instructions_index)
         reservation_station_index=indices_of_potential_reservation_stations_to_write[corresponding_instructions_index.index(most_prior_instruction)]
         Reservation_stations[reservation_station_index].write_result()
+        recently_removed_reservation_station=Reservation_stations[reservation_station_index]
         instruction_table.write_result(most_prior_instruction)#update the instruction table
-    except:
+        #we update the instruction table after the issue so that we don't 
+        # empty a reservation_unit and fill it with another function in the same cycle
+    except :
         pass
     #execute instruction if possible
     for i in range(len(Reservation_stations)):
@@ -91,7 +95,7 @@ while not instruction_table.df["Write Result"].all():
         suitable_reservation_stations=functional_units[instruction_type]
         the_available_unit_index=None
         for i in range(len(suitable_reservation_stations)):
-            if(suitable_reservation_stations[i].can_issue()):
+            if(suitable_reservation_stations[i].can_issue()) and (suitable_reservation_stations[i]!=recently_removed_reservation_station):
                 the_available_unit_index=i
                 print("The available unit index: ", the_available_unit_index)
                 break
@@ -108,11 +112,8 @@ while not instruction_table.df["Write Result"].all():
         Reservation_stations[i].check_data_bus()
     register_file.check_data_bus()
     instruction_table.print_table()
-    # for i in range(len(Reservation_stations)):
-    #     Reservation_stations[i].print_table()
+    register_file.print_table()
     clock+=1
-    if(clock==15):
+    if(clock==30):
         break
-print("Instructions issued: ", instruction_table.get_instructions_issued())
 register_file.print_table()
-print("Data memory: ", data_memory.get_value(0))

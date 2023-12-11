@@ -50,10 +50,12 @@ class RegisterFile:
     def set_value(self, register, value):
         self.Register_values[register]=value
     def check_data_bus(self):
-        for key,value in self.Register_status.items():
-            if value==self.cdb.get_reservation_station() and self.cdb.get_reservation_station()!=None:
-                self.Register_values[key]=self.cdb.get_value()
-                self.Register_status[key]=None
+        for register,reserve_station in self.Register_status.items():
+            if reserve_station==self.cdb.get_reservation_station() and self.cdb.get_reservation_station()!=None:
+                self.Register_values[register]=self.cdb.get_value()
+                self.Register_status[register]=None
+
+        self.cdb.clear_bus()
     def print_table(self):
         print(tabulate(self.Register_values.items(), headers=['Register', 'Value'], tablefmt='pretty'))
 
@@ -70,6 +72,9 @@ class CommonDataBus:
         return self.reservation_station
     def print_table(self):
         print(tabulate([{"Value": self.value, "Reservation Station": self.reservation_station}], headers='keys', tablefmt='pretty'))
+    def clear_bus(self):
+        self.value=None
+        self.reservation_station=None
 
 class ReservationStation:
     def __init__(self, name, register_file,common_data_bus,memory):
@@ -159,7 +164,6 @@ class ReservationStation:
             rA = operands[0].split(",")[0]
             rB = operands[0].split(",")[1]
             rC=operands[0].split(",")[2]
-            self.register_file.Register_status[rA]=self.name
             if self.register_file.Register_status[rB] == None:
                 self.df["Vj"] = self.register_file.Register_values[rB]
             else:
@@ -168,17 +172,18 @@ class ReservationStation:
                 self.df["Vk"] = self.register_file.Register_values[rC]
             else:
                 self.df["Qk"] = self.register_file.Register_status[rC]
+            self.register_file.Register_status[rA]=self.name
         #"ADDI rA, rB, immediate"
         if (self.df["Op"] == "ADDI").all():
             operands = instruction.split()[1:]
             rA = operands[0].split(",")[0]
             rB = operands[0].split(",")[1]
             immediate=operands[0].split(",")[2]
-            self.register_file.Register_status[rA]=self.name
             if self.register_file.Register_status[rB] == None:
                 self.df["Vj"] = self.register_file.Register_values[rB]
             else:
                 self.df["Qj"] = self.register_file.Register_status[rB]
+            self.register_file.Register_status[rA]=self.name
             self.df["Vk"] = int(immediate) 
         #BNE rA, rB, offset
         if (self.df["Op"] == "BNE").all():
@@ -205,10 +210,7 @@ class ReservationStation:
             #TODO: implement the logic to issue return instruction
             pass
     def execute(self):
-        #TODO:don't execute if the operands are not ready
         if(self.df["Execution Cycles left"]!=0).all() and (self.df["Qk"][0]==None) and (self.df["Qj"][0]==None):
-            if (self.df["Op"] == "ADD").all():
-                print("ADD")
             self.df["Execution Cycles left"]-=1
         if(self.df["Execution Cycles left"]==0).all():
             if (self.df["Op"] == "LOAD").all():

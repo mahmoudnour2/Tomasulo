@@ -1,1 +1,4 @@
-STORE r5, 0(r0)
+ADDI r0,r0,1
+DIV r5,r0,r0
+ADD r2,r5,r5
+ADDI r3,r0,5
