@@ -13,7 +13,7 @@ instruction_table=components.InstructionsTable(instruction_table)
 cdb= components.CommonDataBus()
 
 #initializing the memory
-data_memory= components.Memory()
+data_memory= components.DataMemory()
 
 #initializing the reservation stations
 load_station_1= components.ReservationStation("Load1", register_file, cdb,data_memory)
