@@ -2,15 +2,16 @@ import pandas as pd
 import preprocessing
 import components
 
+#initializing the common data bus
+cdb= components.CommonDataBus()
+
 #initializing the register file
-register_file= components.RegisterFile()
+register_file= components.RegisterFile(cdb)
 
 #intializing the instruction table
 instruction_table=preprocessing.get_instruction_queue("program.txt")
 instruction_table=components.InstructionsTable(instruction_table)
 
-#initializing the common data bus
-cdb= components.CommonDataBus()
 
 #initializing the memory
 
@@ -92,7 +93,10 @@ while not instruction_table.df["Write Result"].all():
             #register status is updated in the issue_instr function 
             reservation_station_to_instruction_map[the_available_unit]=issue_index#keep track of which instruction is issued to which reservation station
             issue_index+=1
-
+    # read data from the common data bus (into register file or other reservation stations)
+    for i in range(len(Reservation_stations)):
+        Reservation_stations[i].check_data_bus()
+    register_file.check_data_bus()
     instruction_table.print_table()
     # for i in range(len(Reservation_stations)):
     #     Reservation_stations[i].print_table()
