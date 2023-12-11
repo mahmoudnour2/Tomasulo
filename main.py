@@ -13,6 +13,7 @@ instruction_table=components.InstructionsTable(instruction_table)
 cdb= components.CommonDataBus()
 
 #initializing the memory
+
 data_memory= components.DataMemory()
 
 #initializing the reservation stations
@@ -56,8 +57,8 @@ reservation_station_to_instruction_map= {
     call_return_station: None
 }
 
-issue_index=0
-clock=0
+issue_index = 0
+clock = 0
 while not instruction_table.df["Write Result"].all():
     print("Clock cycle: ", clock)
     #write result if possible

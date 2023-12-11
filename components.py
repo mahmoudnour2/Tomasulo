@@ -22,7 +22,7 @@ class DataMemory:
 
     def print_table(self):
         print(tabulate(self.memory.items(), headers=['Address', 'Value'], tablefmt='pretty'))
-    
+
     def load_from_data_bus(self,cdb):
         address=cdb.get_value()
         self.memory[address]=cdb.get_value()
@@ -63,7 +63,7 @@ class CommonDataBus:
         print(tabulate([{"Value": self.value, "Reservation Station": self.reservation_station}], headers='keys', tablefmt='pretty'))
 
 class ReservationStation:
-    def __init__(self, name, register_file,common_data_bus, memory):
+    def __init__(self, name, register_file,common_data_bus):
         self.register_file=register_file
         self.common_data_bus=common_data_bus
         self.memory=memory
@@ -185,9 +185,10 @@ class ReservationStation:
             self.df["Execution Cycles left"]-=1
         if(self.df["Execution Cycles left"]==0).all():
             if (self.df["Op"] == "LOAD").all():
-                self.result=self.df["A"]+self.df["Vj"]
+                address=self.df["A"]
+                self.result=self.memory.get_value(address)
             if (self.df["Op"] == "STORE").all():
-                self.result=self.df["A"]+self.df["Vj"]
+                self.result=self.df["Vk"]
             if (self.df["Op"] == "ADD").all():
                 self.result=self.df["Vj"]+self.df["Vk"]
             if (self.df["Op"] == "ADDI").all():
@@ -197,17 +198,26 @@ class ReservationStation:
             if (self.df["Op"] == "NAND").all():
                 self.result=~(self.df["Vj"]&self.df["Vk"])
             if (self.df["Op"] == "BNE").all():
-                self.result= 0 if (self.df["Vj"]==self.df["Vk"]) else 1
+                self.result=self.df["Vj"]-self.df["Vk"]
             if (self.df["Op"] == "CALL").all():
                 #TODO: implement the logic to execute Call instruction
                 pass
             if (self.df["Op"] == "RET").all():
                 #TODO: implement the logic to execute return instruction
                 pass
+        if((self.df["Op"]=="LOAD").all() or (self.df["Op"]=="STORE").all()) and self.df["Execution Cycles left"]==self.cycles_needed-1:
+            self.df["A"]=self.df["A"]+self.df["Vj"]
         return (self.df["Execution Cycles left"]==0).all()
     def write_result(self):
-        #update common data bus
-        self.common_data_bus.write_value(self.result,self.df["Op"])
+        if (self.df["Op"]=="STORE").all():
+            #write to data memory
+            address=self.df["A"]
+            self.memory.set_value(address,self.result)
+        else:
+            #update common data bus
+            self.common_data_bus.write_value(self.result,self.df["Name"])
+        #TODO: handle the case of BNE, CALL, and RET
+
         #Clear reservation station values for the functional unit
         self.df["Execution Cycles left"]=None
         self.df["Busy"]=False
