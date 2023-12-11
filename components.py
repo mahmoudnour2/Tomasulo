@@ -32,15 +32,15 @@ class RegisterFile:
         "r0": 0,
         "r1": 1,
         "r2": 2,
-        "r3": 3,
-        "r4": 4,
-        "r5": 5,
-        "r6": 6,
-        "r7": 7,
+        "r3": 0,
+        "r4": 0,
+        "r5": 0,
+        "r6": 0,
+        "r7": 0,
     }
-    def __init__(self):
-        for i in self.Register_values:
-            self.Register_values[i]=0
+    # def __init__(self):
+    #     for i in self.Register_values:
+    #         self.Register_values[i]=0
     def get_value(self, register):
         return self.Register_values[register]
     def set_value(self, register, value):
