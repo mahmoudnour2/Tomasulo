@@ -198,17 +198,15 @@ class ReservationStation:
             if (self.df["Op"] == "STORE").all():
                 self.result=self.df["Vk"]
             if (self.df["Op"] == "ADD").all():
-                print("Vj: ", self.df["Vj"])
-                print("Vk: ", self.df["Vk"])
-                self.result=self.df["Vj"]+self.df["Vk"]
+                self.result=self.df["Vj"][0]+self.df["Vk"][0]
             if (self.df["Op"] == "ADDI").all():
-                self.result=self.df["Vj"]+self.df["Vk"]
+                self.result=self.df["Vj"][0]+self.df["Vk"][0]
             if (self.df["Op"] == "DIV").all():
-                self.result=self.df["Vj"]//self.df["Vk"]
+                self.result=self.df["Vj"][0]//self.df["Vk"][0]
             if (self.df["Op"] == "NAND").all():
-                self.result=~(self.df["Vj"]&self.df["Vk"])
+                self.result=~(self.df["Vj"][0]&self.df["Vk"])[0]
             if (self.df["Op"] == "BNE").all():
-                self.result=self.df["Vj"]-self.df["Vk"]
+                self.result=self.df["Vj"][0]-self.df["Vk"][0]
             if (self.df["Op"] == "CALL").all():
                 #TODO: implement the logic to execute Call instruction
                 pass
@@ -216,7 +214,7 @@ class ReservationStation:
                 #TODO: implement the logic to execute return instruction
                 pass
         if((self.df["Op"]=="LOAD").all() or (self.df["Op"]=="STORE").all()) and self.df["Execution Cycles left"]==self.cycles_needed-1:
-            self.df["A"]=self.df["A"]+self.df["Vj"]
+            self.df["A"]=self.df["A"][0]+self.df["Vj"][0]
         return (self.df["Execution Cycles left"]==0).all()
     def write_result(self):
         if (self.df["Op"]=="STORE").all():
@@ -225,11 +223,7 @@ class ReservationStation:
             self.memory.set_value(address,self.result)
         else:
             #update common data bus
-            print("Result: ", self.result)
-            print("Writing result to common data bus from reservation station: ", self.name)
-            
-            reservation_station_name=str(self.df["Name"])  # Convert reservation_station_name to string
-            self.common_data_bus.write_value(self.result,reservation_station_name)
+            self.common_data_bus.write_value(self.result,self.df["Name"][0])
         #TODO: handle the case of BNE, CALL, and RET
         #Clear reservation station values for the functional unit
         self.df["Execution Cycles left"]=None
