@@ -61,15 +61,23 @@ reservation_station_to_instruction_map= {
 }
 
 issue_index = 0
-clock = 0
+clock = 1
 while not instruction_table.df["Write Result"].all():
     print("Clock cycle: ", clock)
     #write result if possible
+    indices_of_potential_reservation_stations_to_write=[]
+    corresponding_instructions_index=[]
     for i in range(len(Reservation_stations)):
         if Reservation_stations[i].can_write_result():
-            Reservation_stations[i].write_result()
-            instruction_table.write_result(reservation_station_to_instruction_map[Reservation_stations[i]])#update the instruction table
-
+            indices_of_potential_reservation_stations_to_write.append(i)
+            corresponding_instructions_index.append(reservation_station_to_instruction_map[Reservation_stations[i]])
+    try:
+        most_prior_instruction = min(corresponding_instructions_index)
+        reservation_station_index=indices_of_potential_reservation_stations_to_write[corresponding_instructions_index.index(most_prior_instruction)]
+        Reservation_stations[reservation_station_index].write_result()
+        instruction_table.write_result(most_prior_instruction)#update the instruction table
+    except:
+        pass
     #execute instruction if possible
     for i in range(len(Reservation_stations)):
         executed=Reservation_stations[i].execute()
@@ -103,7 +111,5 @@ while not instruction_table.df["Write Result"].all():
     # for i in range(len(Reservation_stations)):
     #     Reservation_stations[i].print_table()
     clock+=1
-    if(clock==10):
-        break
 print("Instructions issued: ", instruction_table.get_instructions_issued())
 register_file.print_table()

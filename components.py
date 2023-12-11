@@ -30,6 +30,7 @@ class RegisterFile:
     "r5": None,
     "r6": None,
     "r7": None,
+    
     }
     Register_values= {
         "r0": 0,
@@ -100,6 +101,19 @@ class ReservationStation:
             "Nand": 1,
             "Call/Ret": 1,
         }
+        # cycles= {
+        #     "Load1": 2,
+        #     "Load2": 2,
+        #     "Store1": 3,
+        #     "Store2": 3,
+        #     "Add1": 2,
+        #     "Add2": 2,
+        #     "Add3": 2,
+        #     "Div": 12,
+        #     "BNE": 1,
+        #     "Nand": 6,
+        #     "Call/Ret": 1,
+        # }
         self.df = pd.DataFrame([reservation_station])
         self.name=name
         self.cycles_needed=cycles[name]
@@ -109,6 +123,8 @@ class ReservationStation:
         self.df["Busy"] = True
         self.df["Op"] = instruction.split()[0]
         self.df["Execution Cycles left"] = self.cycles_needed
+        self.df["Qj"] = None
+        self.df["Qk"] = None
         # "Load rA, offset(rB)"
         if (self.df["Op"] == "LOAD").all():
             operands = instruction.split()[1:]
@@ -189,7 +205,10 @@ class ReservationStation:
             #TODO: implement the logic to issue return instruction
             pass
     def execute(self):
-        if(self.df["Execution Cycles left"]!=0).all():
+        #TODO:don't execute if the operands are not ready
+        if(self.df["Execution Cycles left"]!=0).all() and (self.df["Qk"][0]==None) and (self.df["Qj"][0]==None):
+            if (self.df["Op"] == "ADD").all():
+                print("ADD")
             self.df["Execution Cycles left"]-=1
         if(self.df["Execution Cycles left"]==0).all():
             if (self.df["Op"] == "LOAD").all():
