@@ -19,7 +19,8 @@ class DataMemory:
         self.memory[address]=cdb.get_value()
 
 class RegisterFile:
-    self.cdb=cdb
+    def __init__(self,cdb):
+        self.cdb=cdb
     Register_status= {
     "r0": None,
     "r1": None,
@@ -48,10 +49,10 @@ class RegisterFile:
     def set_value(self, register, value):
         self.Register_values[register]=value
     def check_data_bus(self):
-        for i in self.Register_status:
-            if self.Register_status[i]==self.cdb.get_reservation_station():
-                self.Register_values[i]=self.cdb.get_value()
-                self.Register_status[i]=None
+        for key,value in self.Register_status.items():
+            if value==self.cdb.get_reservation_station() and self.cdb.get_reservation_station()!=None:
+                self.Register_values[key]=self.cdb.get_value()
+                self.Register_status[key]=None
     def print_table(self):
         print(tabulate(self.Register_values.items(), headers=['Register', 'Value'], tablefmt='pretty'))
 
@@ -70,7 +71,7 @@ class CommonDataBus:
         print(tabulate([{"Value": self.value, "Reservation Station": self.reservation_station}], headers='keys', tablefmt='pretty'))
 
 class ReservationStation:
-    def __init__(self, name, register_file,common_data_bus):
+    def __init__(self, name, register_file,common_data_bus, memory):
         self.register_file=register_file
         self.common_data_bus=common_data_bus
         self.memory=memory
@@ -197,6 +198,8 @@ class ReservationStation:
             if (self.df["Op"] == "STORE").all():
                 self.result=self.df["Vk"]
             if (self.df["Op"] == "ADD").all():
+                print("Vj: ", self.df["Vj"])
+                print("Vk: ", self.df["Vk"])
                 self.result=self.df["Vj"]+self.df["Vk"]
             if (self.df["Op"] == "ADDI").all():
                 self.result=self.df["Vj"]+self.df["Vk"]
@@ -222,7 +225,11 @@ class ReservationStation:
             self.memory.set_value(address,self.result)
         else:
             #update common data bus
-            self.common_data_bus.write_value(self.result,self.df["Name"])
+            print("Result: ", self.result)
+            print("Writing result to common data bus from reservation station: ", self.name)
+            
+            reservation_station_name=str(self.df["Name"])  # Convert reservation_station_name to string
+            self.common_data_bus.write_value(self.result,reservation_station_name)
         #TODO: handle the case of BNE, CALL, and RET
         #Clear reservation station values for the functional unit
         self.df["Execution Cycles left"]=None
@@ -239,10 +246,10 @@ class ReservationStation:
     def print_table(self):
         print(tabulate(self.df, headers='keys', tablefmt='pretty'))
     def check_data_bus(self):
-        if self.df["Qj"]==self.common_data_bus.get_reservation_station():
+        if (self.df["Qj"]==self.common_data_bus.get_reservation_station()).all():
             self.df["Vj"]=self.common_data_bus.get_value()
             self.df["Qj"]=None
-        if self.df["Qk"]==self.common_data_bus.get_reservation_station():
+        if (self.df["Qk"]==self.common_data_bus.get_reservation_station()).all():
             self.df["Vk"]=self.common_data_bus.get_value()
             self.df["Qk"]=None
 class InstructionsTable:
