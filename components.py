@@ -1,5 +1,6 @@
 import pandas as pd
 from tabulate import tabulate
+import sys
 
 class DataMemory:
     def __init__(self):
@@ -9,7 +10,11 @@ class DataMemory:
         return self.memory[address]
 
     def set_value(self, address, value):
-        self.memory[address] = value
+        try:
+            self.memory[address] = value
+        except Exception as e:
+            line_number = sys.exc_info()[-1].tb_lineno
+            print(f"An error occurred on line {line_number}: {type(e).__name__} - {str(e)}")
 
     def print_table(self):
         print(tabulate(self.memory.items(), headers=['Address', 'Value'], tablefmt='pretty'))
@@ -236,23 +241,29 @@ class ReservationStation:
             self.df["A"]=int(self.df["A"][0]+self.df["Vj"][0])
         return (self.df["Execution Cycles left"]==0).all()
     def write_result(self):
-        if (self.df["Op"]=="STORE").all():
-            #write to data memory
-            address=self.df["A"]
-            self.memory.set_value(address,self.result)
-        else:
-            #update common data bus
-            self.common_data_bus.write_value(self.result,self.df["Name"][0])
-        #TODO: handle the case of BNE, CALL, and RET
-        #Clear reservation station values for the functional unit
-        self.df["Execution Cycles left"]=None
-        self.df["Busy"]=False
-        self.df["Op"]=None
-        self.df["Vj"]=None
-        self.df["Vk"]=None
-        self.df["Qj"]=None
-        self.df["Qk"]=None
-        self.df["A"]=None
+        try:
+            print("Writing result of ", self.name)
+            if (self.df["Op"]=="STORE").all():
+                #write to data memory
+                address=self.df["A"]
+                self.memory.set_value(address,self.result)
+            else:
+                #update common data bus
+                self.common_data_bus.write_value(self.result,self.df["Name"][0])
+            #TODO: handle the case of BNE, CALL, and RET
+            #Clear reservation station values for the functional unit
+            self.df["Execution Cycles left"]=None
+            self.df["Busy"]=False
+            self.df["Op"]=None
+            self.df["Vj"]=None
+            self.df["Vk"]=None
+            self.df["Qj"]=None
+            self.df["Qk"]=None
+            self.df["A"]=None
+        except Exception as e:
+            # Print the exception details along with the line number
+            line_number = sys.exc_info()[-1].tb_lineno
+            print(f"An error occurred on line {line_number}: {type(e).__name__} - {str(e)}")
         #update of register status is done after reading the data in the register file from the common data bus
     def can_write_result(self):
         return (self.df["Execution Cycles left"]==0).all()

@@ -1,6 +1,7 @@
 import pandas as pd
 import preprocessing
 import components
+import sys
 
 #initializing the common data bus
 cdb= components.CommonDataBus()
@@ -72,13 +73,17 @@ while not instruction_table.df["Write Result"].all():
             indices_of_potential_reservation_stations_to_write.append(i)
             corresponding_instructions_index.append(reservation_station_to_instruction_map[Reservation_stations[i]])
     try:
-        most_prior_instruction = min(corresponding_instructions_index)
+        most_prior_instruction = min(corresponding_instructions_index)#index of most_prior_instruction in instruction table
         reservation_station_index=indices_of_potential_reservation_stations_to_write[corresponding_instructions_index.index(most_prior_instruction)]
-        Reservation_stations[reservation_station_index].write_result()
-        instruction_table.write_result(most_prior_instruction)#update the instruction table
     except:
         pass
-    #execute instruction if possible
+    try:
+        Reservation_stations[reservation_station_index].write_result()
+        instruction_table.write_result(most_prior_instruction)#update the instruction table
+    except Exception as e:
+        # Print the exception details along with the line number
+        line_number = sys.exc_info()[-1].tb_lineno
+        print(f"An error occurred on line {line_number}: {type(e).__name__} - {str(e)}")
     for i in range(len(Reservation_stations)):
         executed=Reservation_stations[i].execute()
         if(executed):
@@ -111,5 +116,9 @@ while not instruction_table.df["Write Result"].all():
     # for i in range(len(Reservation_stations)):
     #     Reservation_stations[i].print_table()
     clock+=1
+    if(clock==20):
+        break
+
 print("Instructions issued: ", instruction_table.get_instructions_issued())
 register_file.print_table()
+print("Data memory: ",data_memory.get_value(0))
