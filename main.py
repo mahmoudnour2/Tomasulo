@@ -65,6 +65,7 @@ clock = 1
 while not instruction_table.df["Write Result"].all():
     print("Clock cycle: ", clock)
     recently_removed_reservation_station=None
+    branch=False
     #write result if possible
     indices_of_potential_reservation_stations_to_write=[]
     corresponding_instructions_index=[]
@@ -75,7 +76,13 @@ while not instruction_table.df["Write Result"].all():
     try:
         most_prior_instruction = min(corresponding_instructions_index)
         reservation_station_index=indices_of_potential_reservation_stations_to_write[corresponding_instructions_index.index(most_prior_instruction)]
-        Reservation_stations[reservation_station_index].write_result()
+        branch=Reservation_stations[reservation_station_index].write_result()
+        if branch:
+            branch_reservation_station=cdb.get_reservation_station()
+            branch_offset=cdb.get_value()
+            index_of_branch_instruction=reservation_station_to_instruction_map[branch_reservation_station]
+            #TODO: flush instructions after branch (from index_of_branch_instruction+1 to the current index)
+            #TODO: update the PC (issue_index) to the branch instruction's PC + branch_offset + 1
         recently_removed_reservation_station=Reservation_stations[reservation_station_index]
         instruction_table.write_result(most_prior_instruction)#update the instruction table
         #we update the instruction table after the issue so that we don't 
@@ -83,6 +90,7 @@ while not instruction_table.df["Write Result"].all():
     except :
         pass
     #execute instruction if possible
+    #TODO: if the instruction being executed is a branch, stop executing the rest of the instructions
     for i in range(len(Reservation_stations)):
         executed=Reservation_stations[i].execute()
         if(executed):

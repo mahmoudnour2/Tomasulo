@@ -227,7 +227,7 @@ class ReservationStation:
             if (self.df["Op"] == "NAND").all():
                 self.result=~(self.df["Vj"][0]&self.df["Vk"])[0]
             if (self.df["Op"] == "BNE").all():
-                self.result=self.df["Vj"][0]-self.df["Vk"][0]
+                self.result=self.df["A"][0]
             if (self.df["Op"] == "CALL").all():
                 #TODO: implement the logic to execute Call instruction
                 pass
@@ -242,9 +242,17 @@ class ReservationStation:
             #write to data memory
             address=self.df["A"][0]
             self.memory.set_value(address,self.result)
+            return False
+        if (self.df["Op"]=="BNE").all():
+            if (self.df["Vj"]!=self.df["Vk"]).all():
+                self.common_data_bus.write_value(self.result,self.df["Name"][0])
+                return True #return true to indicate that we need to branch
+            #update common data bus
+            pass
         else:
             #update common data bus
             self.common_data_bus.write_value(self.result,self.df["Name"][0])
+            return False
         #TODO: handle the case of BNE, CALL, and RET
         #Clear reservation station values for the functional unit
         self.df["Execution Cycles left"]=None
