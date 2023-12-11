@@ -215,7 +215,7 @@ class ReservationStation:
                 address=int(self.df["A"][0])
                 self.result=self.memory.get_value(address)
             if (self.df["Op"] == "STORE").all():
-                self.result=self.df["Vk"]
+                self.result=self.df["Vk"][0]
             if (self.df["Op"] == "ADD").all():
                 self.result=self.df["Vj"][0]+self.df["Vk"][0]
             if (self.df["Op"] == "ADDI").all():
@@ -238,7 +238,7 @@ class ReservationStation:
     def write_result(self):
         if (self.df["Op"]=="STORE").all():
             #write to data memory
-            address=self.df["A"]
+            address=self.df["A"][0]
             self.memory.set_value(address,self.result)
         else:
             #update common data bus

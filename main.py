@@ -111,5 +111,8 @@ while not instruction_table.df["Write Result"].all():
     # for i in range(len(Reservation_stations)):
     #     Reservation_stations[i].print_table()
     clock+=1
+    if(clock==15):
+        break
 print("Instructions issued: ", instruction_table.get_instructions_issued())
 register_file.print_table()
+print("Data memory: ", data_memory.get_value(0))
