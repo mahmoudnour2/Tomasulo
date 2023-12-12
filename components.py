@@ -185,12 +185,12 @@ class ReservationStation:
                 self.df["Qj"] = self.register_file.Register_status[rB]
             self.register_file.Register_status[rA]=self.name
             self.df["Vk"] = int(immediate) 
-        #BNE rA, rB, offset
+        #BNE rA,rB,offset
         if (self.df["Op"] == "BNE").all():
             operands = instruction.split()[1:]
-            rA = operands.split(",")[0]
-            rB = operands.split(",")[1]
-            offset=operands.split(",")[2]
+            rA = operands[0].split(",")[0]
+            rB = operands[0].split(",")[1]
+            offset=operands[0].split(",")[2]
             self.df["A"] = int(offset)
             if self.register_file.Register_status[rA] == None:
                 self.df["Vj"] = rA
@@ -202,15 +202,21 @@ class ReservationStation:
                 self.df["Qk"] = self.register_file.Register_status[rB]
         #Call label
         if (self.df["Op"] == "CALL").all():
-            #TODO: implement the logic to issue Call instruction
-            label = instruction.split(" ")[1]
-            pass
+            self.df["A"]=instruction.split(" ")[1]
+            self.df["Op"]="CALL"
         #RET
         if (self.df["Op"] == "RET").all():
-            #TODO: implement the logic to issue return instruction
-            pass
+            self.df["Op"]="RET"
     def execute(self):
+        if (self.df["Name"]=="Add1").all():
+            print("Executing instruction: ", self.df["Op"][0])
+            print("Vj: ", self.df["Vj"][0])
+            print("Vk: ", self.df["Vk"][0])
+            print("Qj: ", self.df["Qj"][0])
+            print("Qk: ", self.df["Qk"][0])
         if(self.df["Execution Cycles left"]!=0).all() and (self.df["Qk"][0]==None) and (self.df["Qj"][0]==None):
+            if (self.df["Execution Cycles left"][0]!=None):
+                print("Executing instruction: ", self.df["Op"][0])
             self.df["Execution Cycles left"]-=1
         if(self.df["Execution Cycles left"]==0).all():
             if (self.df["Op"] == "LOAD").all():
@@ -229,30 +235,39 @@ class ReservationStation:
             if (self.df["Op"] == "BNE").all():
                 self.result=self.df["A"][0]
             if (self.df["Op"] == "CALL").all():
-                #TODO: implement the logic to execute Call instruction
+                self.result=self.df["A"][0]
                 pass
             if (self.df["Op"] == "RET").all():
-                #TODO: implement the logic to execute return instruction
-                pass
+                self.result=self.register_file.Register_values["r1"]
         if((self.df["Op"]=="LOAD").all() or (self.df["Op"]=="STORE").all()) and self.df["Execution Cycles left"][0]==self.cycles_needed-1:
             self.df["A"]=int(self.df["A"][0]+self.df["Vj"][0])
         return (self.df["Execution Cycles left"]==0).all()
-    def write_result(self):
+    
+    def write_result(self, issue_index):
+        branch=False
+        ret=False
+        call=False
         if (self.df["Op"]=="STORE").all():
             #write to data memory
             address=self.df["A"][0]
             self.memory.set_value(address,self.result)
-            return False
         if (self.df["Op"]=="BNE").all():
+            print("WE ARE A BNE INSTRUCTION!!!")
             if (self.df["Vj"]!=self.df["Vk"]).all():
+                #update common data bus with the branch offset
                 self.common_data_bus.write_value(self.result,self.df["Name"][0])
-                return True #return true to indicate that we need to branch
-            #update common data bus
-            pass
+                branch=True #return true to indicate that we need to branch
+        if (self.df["Op"]=="CALL").all():
+            #update common data bus with the jump offset
+            self.common_data_bus.write_value(self.result,self.df["Name"][0])
+            self.register_file.Register_values["r1"]=issue_index+1
+            call=True
+        if  (self.df["Op"]=="RET").all():
+            self.common_data_bus.write_value(self.result,self.df["Name"][0])
+            ret=True
         else:
             #update common data bus
             self.common_data_bus.write_value(self.result,self.df["Name"][0])
-            return False
         #TODO: handle the case of BNE, CALL, and RET
         #Clear reservation station values for the functional unit
         self.df["Execution Cycles left"]=None
@@ -263,6 +278,7 @@ class ReservationStation:
         self.df["Qj"]=None
         self.df["Qk"]=None
         self.df["A"]=None
+        return branch,ret,call
         #update of register status is done after reading the data in the register file from the common data bus
     def can_write_result(self):
         return (self.df["Execution Cycles left"]==0).all()
@@ -275,6 +291,27 @@ class ReservationStation:
         if (self.df["Qk"]==self.common_data_bus.get_reservation_station()).all():
             self.df["Vk"]=self.common_data_bus.get_value()
             self.df["Qk"]=None
+    def clear(self):
+        self.df["Execution Cycles left"]=None
+        self.df["Busy"]=False
+        self.df["Op"]=None
+        self.df["Vj"]=None
+        self.df["Vk"]=None
+        self.df["Qj"]=None
+        self.df["Qk"]=None
+        self.df["A"]=None
+    def clear_dependency(self, cleared_reservation_stations):
+        if self.df["Qj"][0] in cleared_reservation_stations:
+            self.df["Qj"]=None
+            for register,station in self.register_file.Register_status.items():
+                if station==self.name:
+                    self.df["Vj"]=self.register_file.Register_values[register]
+        if self.df["Qk"][0] in cleared_reservation_stations:
+            self.df["Qk"]=None
+            for register,station in self.register_file.Register_status.items():
+                if station==self.name:
+                    self.df["Vk"]=self.register_file.Register_values[register]
+        
 class InstructionsTable:
     # instructions_queue= {
     # "Operation": ["ADD", "ADD", "ADD"],
