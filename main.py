@@ -117,6 +117,10 @@ while instruction_table.instructions_written+skipped_instructions<number_of_inst
             #restore register status before branch
             register_file.restore_register_status_state(register_status_at_branch, cleared_reservation_stations)
         if branch:
+            all_before_branch_finished=instruction_table.check_all_before_branch_finished(branch_instr_index)
+            if all_before_branch_finished==False:
+                print("Waiting for instructions before branch to finish")
+                continue
             branch_offset=cdb.get_value()
             bne_station=Reservation_stations[8]
             index_of_branch_instruction=reservation_station_to_instruction_map[bne_station]

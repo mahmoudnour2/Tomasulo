@@ -378,3 +378,5 @@ class InstructionsTable:
         return self.instructions_executed
     def get_instructions_written(self):
         return self.instructions_written
+    def check_all_before_branch_finished(self,index):
+        return (self.df["Write Result"][0:index]==True).all()
