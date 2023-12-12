@@ -42,6 +42,16 @@ class RegisterFile:
         "r6": 0,
         "r7": 0,
     }
+    state_of_register_status= {#this is used to store the state of the register status at a given time
+    "r0": None,
+    "r1": None,
+    "r2": None,
+    "r3": None,
+    "r4": None,
+    "r5": None,
+    "r6": None,
+    "r7": None,
+    }
     # def __init__(self):
     #     for i in self.Register_values:
     #         self.Register_values[i]=0
@@ -52,12 +62,27 @@ class RegisterFile:
     def check_data_bus(self):
         for register,reserve_station in self.Register_status.items():
             if reserve_station==self.cdb.get_reservation_station() and self.cdb.get_reservation_station()!=None:
-                self.Register_values[register]=self.cdb.get_value()
+                if register!="r0":
+                    self.Register_values[register]=self.cdb.get_value()
                 self.Register_status[register]=None
 
         self.cdb.clear_bus()
     def print_table(self):
         print(tabulate(self.Register_values.items(), headers=['Register', 'Value'], tablefmt='pretty'))
+    def print_register_status(self):
+        print(tabulate(self.Register_status.items(), headers=['Register', 'Status'], tablefmt='pretty'))
+    def save_register_status_state_now(self):
+        self.state_of_register_status=self.Register_status.copy()
+    def get_register_saved_state(self):
+        return self.state_of_register_status.copy()
+    def restore_register_status_state(self,state,cleared_reservation_stations):
+        cleared_reservation_stations_names_branch=[]
+        for station in cleared_reservation_stations:
+            cleared_reservation_stations_names_branch.append(station.df["Name"][0])
+        for register,station in self.Register_status.items():
+            if station in cleared_reservation_stations_names_branch:
+                self.Register_status[register]=state[register]
+    
 
 class CommonDataBus:
     def __init__(self):
@@ -207,10 +232,11 @@ class ReservationStation:
         #RET
         if (self.df["Op"] == "RET").all():
             self.df["Op"]="RET"
+            self.df["A"]=self.register_file.Register_values["r1"]
     def execute(self):
         if(self.df["Execution Cycles left"]!=0).all() and (self.df["Qk"][0]==None) and (self.df["Qj"][0]==None):
-            if (self.df["Execution Cycles left"][0]!=None):
-                print("Executing instruction: ", self.df["Op"][0])
+            # if (self.df["Execution Cycles left"][0]!=None):
+                # print("Executing instruction: ", self.df["Op"][0])
             self.df["Execution Cycles left"]-=1
         if(self.df["Execution Cycles left"]==0).all():
             if (self.df["Op"] == "LOAD").all():
@@ -223,6 +249,8 @@ class ReservationStation:
             if (self.df["Op"] == "ADDI").all():
                 self.result=self.df["Vj"][0]+self.df["Vk"][0]
             if (self.df["Op"] == "DIV").all():
+                if self.df["Vk"][0]==0:
+                    raise ZeroDivisionError("Divide by zero error")
                 self.result=self.df["Vj"][0]//self.df["Vk"][0]
             if (self.df["Op"] == "NAND").all():
                 self.result=~(self.df["Vj"][0]&self.df["Vk"])[0]
@@ -230,9 +258,8 @@ class ReservationStation:
                 self.result=self.df["A"][0]
             if (self.df["Op"] == "CALL").all():
                 self.result=self.df["A"][0]
-                pass
             if (self.df["Op"] == "RET").all():
-                self.result=self.register_file.Register_values["r1"]
+                self.result=self.df["A"][0]
         if((self.df["Op"]=="LOAD").all() or (self.df["Op"]=="STORE").all()) and self.df["Execution Cycles left"][0]==self.cycles_needed-1:
             self.df["A"]=int(self.df["A"][0]+self.df["Vj"][0])
         return (self.df["Execution Cycles left"]==0).all()
@@ -246,7 +273,7 @@ class ReservationStation:
             address=self.df["A"][0]
             self.memory.set_value(address,self.result)
         if (self.df["Op"]=="BNE").all():
-            print("WE ARE A BNE INSTRUCTION!!!")
+            # print("WE ARE A BNE INSTRUCTION!!!")
             if (self.df["Vj"]!=self.df["Vk"]).all():
                 #update common data bus with the branch offset
                 self.common_data_bus.write_value(self.result,self.df["Name"][0])
@@ -259,6 +286,9 @@ class ReservationStation:
         if  (self.df["Op"]=="RET").all():
             self.common_data_bus.write_value(self.result,self.df["Name"][0])
             ret=True
+        if (self.df["Op"][0]=="DIV"):
+            # print ("At div result is ",self.result)
+            self.common_data_bus.write_value(self.result,self.df["Name"][0])
         else:
             #update common data bus
             self.common_data_bus.write_value(self.result,self.df["Name"][0])
@@ -295,17 +325,26 @@ class ReservationStation:
         self.df["Qk"]=None
         self.df["A"]=None
     def clear_dependency(self, cleared_reservation_stations):
-        if self.df["Qj"][0] in cleared_reservation_stations:
-            self.df["Qj"]=None
-            for register,station in self.register_file.Register_status.items():
-                if station==self.name:
-                    self.df["Vj"]=self.register_file.Register_values[register]
-        if self.df["Qk"][0] in cleared_reservation_stations:
-            self.df["Qk"]=None
-            for register,station in self.register_file.Register_status.items():
-                if station==self.name:
-                    self.df["Vk"]=self.register_file.Register_values[register]
-        
+        ReservationStations_names=[]
+        if cleared_reservation_stations==None:
+            return
+        for station in cleared_reservation_stations:
+            ReservationStations_names.append(station.name)
+        # print("At","Reservation ",self.name," ReservationStations_names: ",ReservationStations_names)
+        # print("At Reservation station", self.name, "Qj is ",self.df["Qj"], "and Qk is ",self.df["Qk"])
+        if self.df["Qj"][0]!=None:
+            if self.df["Qj"][0] in ReservationStations_names:
+                self.df["Qj"]=None
+                for register,station in self.register_file.Register_status.items():
+                    if station==self.name:
+                        self.df["Vj"]=self.register_file.Register_values[register]
+        if self.df["Qk"][0]!=None:
+            if self.df["Qk"][0] in ReservationStations_names:
+                self.df["Qk"]=None
+                for register,station in self.register_file.Register_status.items():
+                    if station==self.name:
+                        self.df["Vk"]=self.register_file.Register_values[register]
+            
 class InstructionsTable:
     def __init__(self, instructions):
         self.df = pd.DataFrame(instructions)

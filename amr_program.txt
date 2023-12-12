@@ -1,5 +1,6 @@
 ADDI r1,r0,18
 ADDI r2,r0,3
+DIV r2,r1,r2
 BNE r3,r2,4
 ADDI r1,r0,9
 ADDI r2,r0,10
