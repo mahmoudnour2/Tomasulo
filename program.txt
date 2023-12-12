@@ -1,11 +1,10 @@
 ADDI r1,r0,18
 ADDI r2,r0,3
 DIV r2,r1,r2
-BNE r3,r2,4
 ADDI r1,r0,9
 ADDI r2,r0,10
 ADDI r3,r0,11
-ADDI r4,r1,r2
+ADDI r4,r1,2
 NAND r5,r1,r2
 STORE r5, 3(r0)
 LOAD r6, 3(r0)

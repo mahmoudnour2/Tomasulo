@@ -107,7 +107,6 @@ while instruction_table.instructions_written+skipped_instructions<number_of_inst
                 if station in cleared_reservation_stations:
                     register_file.Register_status[register]=None
         if branch:
-            print("Branch instruction")
             branch_offset=cdb.get_value()
             bne_station=Reservation_stations[8]
             index_of_branch_instruction=reservation_station_to_instruction_map[bne_station]
@@ -147,10 +146,8 @@ while instruction_table.instructions_written+skipped_instructions<number_of_inst
         instruction_table.write_result(most_prior_instruction)#update the instruction table
         #we update the instruction table after the issue so that we don't 
         # empty a reservation_unit and fill it with another function in the same cycle
-    except Exception as e:
-        # Print the exception details along with the line number
-        line_number = sys.exc_info()[-1].tb_lineno
-        print(f"An error occurred on line {line_number}: {type(e).__name__} - {str(e)}")
+    except :
+        pass
     #execute instruction if possible
     #TODO: if the instruction being executed is a branch, stop executing the rest of the instructions
     if stall_execution==False:
@@ -180,7 +177,6 @@ while instruction_table.instructions_written+skipped_instructions<number_of_inst
         for i in range(len(suitable_reservation_stations)):
             if(suitable_reservation_stations[i].can_issue()) and (suitable_reservation_stations[i]!=recently_removed_reservation_station):
                 the_available_unit_index=i
-                print("The available unit index: ", the_available_unit_index)
                 break
         if the_available_unit_index!=None:
             the_available_unit=suitable_reservation_stations[the_available_unit_index]
@@ -199,7 +195,9 @@ while instruction_table.instructions_written+skipped_instructions<number_of_inst
     print("In clock cycle: ", clock, "the stall execution is: ", stall_execution)
     print("The branch instruction index is: ", branch_instr_index)
     print("\n")
+    for i in range(len(Reservation_stations)):
+        Reservation_stations[i].print_table()
     clock+=1
-    if(clock==100):
+    if(clock==50):
         break
 register_file.print_table()

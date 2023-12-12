@@ -13,7 +13,6 @@ def read_data(file_path, data_memory):
             data_memory.set_value(address,value)
 def get_instruction_queue(file_path):
     instructions = read_program(file_path)
-    print(instructions)
     operations = []
     for instruction in instructions:
         words = instruction.split()

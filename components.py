@@ -208,12 +208,6 @@ class ReservationStation:
         if (self.df["Op"] == "RET").all():
             self.df["Op"]="RET"
     def execute(self):
-        if (self.df["Name"]=="Add1").all():
-            print("Executing instruction: ", self.df["Op"][0])
-            print("Vj: ", self.df["Vj"][0])
-            print("Vk: ", self.df["Vk"][0])
-            print("Qj: ", self.df["Qj"][0])
-            print("Qk: ", self.df["Qk"][0])
         if(self.df["Execution Cycles left"]!=0).all() and (self.df["Qk"][0]==None) and (self.df["Qj"][0]==None):
             if (self.df["Execution Cycles left"][0]!=None):
                 print("Executing instruction: ", self.df["Op"][0])
@@ -313,13 +307,6 @@ class ReservationStation:
                     self.df["Vk"]=self.register_file.Register_values[register]
         
 class InstructionsTable:
-    # instructions_queue= {
-    # "Operation": ["ADD", "ADD", "ADD"],
-    # "Instruction": ["ADD r1, r2, r3)", "ADD r2, r3, r4", "ADD r5, r6, r7"],
-    # "Issue": [False, False, False],
-    # "Execute": [False, False, False],
-    # "Write Result": [False, False, False],
-    # }
     def __init__(self, instructions):
         self.df = pd.DataFrame(instructions)
         self.issue_index=0
@@ -337,7 +324,8 @@ class InstructionsTable:
         self.df.loc[index,"Write Result"]=True
         self.instructions_written+=1
     def print_table(self):
-        print(self.df.head())
+        with pd.option_context('display.max_rows', None, 'display.max_columns', None):
+            print(self.df)
     def get_table(self):
         print(tabulate(self.df, headers='keys', tablefmt='pretty'))
     def get_instruction(self,index):

@@ -1,0 +1,3188 @@
+Clock cycle:  1
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True    False         False
+1       ADDI     ADDI r2,r0,3  False    False         False
+2        DIV     DIV r2,r1,r2  False    False         False
+3       ADDI     ADDI r1,r0,9  False    False         False
+4       ADDI    ADDI r2,r0,10  False    False         False
+5       ADDI    ADDI r3,r0,11  False    False         False
+6       ADDI     ADDI r4,r1,2  False    False         False
+7       NAND    NAND r5,r1,r2  False    False         False
+8      STORE  STORE r5, 3(r0)  False    False         False
+9       LOAD   LOAD r6, 3(r0)  False    False         False
+10      LOAD   LOAD r6, 1(r0)  False    False         False
+11      ADDI    ADDI r1,r0,19  False    False         False
+12       ADD     ADD r3,r1,r2  False    False         False
+13       ADD     ADD r3,r3,r3  False    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   0   |
+|    r2    |   0   |
+|    r3    |   0   |
+|    r4    |   0   |
+|    r5    |   0   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  1 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           2           | Add1 | True | ADDI | 0  | 18 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add2 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add3 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Div  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  2
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  ADDI
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True    False         False
+1       ADDI     ADDI r2,r0,3   True    False         False
+2        DIV     DIV r2,r1,r2  False    False         False
+3       ADDI     ADDI r1,r0,9  False    False         False
+4       ADDI    ADDI r2,r0,10  False    False         False
+5       ADDI    ADDI r3,r0,11  False    False         False
+6       ADDI     ADDI r4,r1,2  False    False         False
+7       NAND    NAND r5,r1,r2  False    False         False
+8      STORE  STORE r5, 3(r0)  False    False         False
+9       LOAD   LOAD r6, 3(r0)  False    False         False
+10      LOAD   LOAD r6, 1(r0)  False    False         False
+11      ADDI    ADDI r1,r0,19  False    False         False
+12       ADD     ADD r3,r1,r2  False    False         False
+13       ADD     ADD r3,r3,r3  False    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   0   |
+|    r2    |   0   |
+|    r3    |   0   |
+|    r4    |   0   |
+|    r5    |   0   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  2 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           1           | Add1 | True | ADDI | 0  | 18 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           2           | Add2 | True | ADDI | 0  | 3  |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add3 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Div  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  3
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  ADDI
+Executing instruction:  ADDI
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True         False
+1       ADDI     ADDI r2,r0,3   True    False         False
+2        DIV     DIV r2,r1,r2   True    False         False
+3       ADDI     ADDI r1,r0,9  False    False         False
+4       ADDI    ADDI r2,r0,10  False    False         False
+5       ADDI    ADDI r3,r0,11  False    False         False
+6       ADDI     ADDI r4,r1,2  False    False         False
+7       NAND    NAND r5,r1,r2  False    False         False
+8      STORE  STORE r5, 3(r0)  False    False         False
+9       LOAD   LOAD r6, 3(r0)  False    False         False
+10      LOAD   LOAD r6, 1(r0)  False    False         False
+11      ADDI    ADDI r1,r0,19  False    False         False
+12       ADD     ADD r3,r1,r2  False    False         False
+13       ADD     ADD r3,r3,r3  False    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   0   |
+|    r2    |   0   |
+|    r3    |   0   |
+|    r4    |   0   |
+|    r5    |   0   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  3 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           0           | Add1 | True | ADDI | 0  | 18 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           1           | Add2 | True | ADDI | 0  | 3  |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add3 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+------+------+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  |  Qk  | A |
++---+-----------------------+------+------+-----+----+----+------+------+---+
+| 0 |          10           | Div  | True | DIV |    |    | Add1 | Add2 |   |
++---+-----------------------+------+------+-----+----+----+------+------+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  4
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  ADDI
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True         False
+2        DIV     DIV r2,r1,r2   True    False         False
+3       ADDI     ADDI r1,r0,9   True    False         False
+4       ADDI    ADDI r2,r0,10  False    False         False
+5       ADDI    ADDI r3,r0,11  False    False         False
+6       ADDI     ADDI r4,r1,2  False    False         False
+7       NAND    NAND r5,r1,r2  False    False         False
+8      STORE  STORE r5, 3(r0)  False    False         False
+9       LOAD   LOAD r6, 3(r0)  False    False         False
+10      LOAD   LOAD r6, 1(r0)  False    False         False
+11      ADDI    ADDI r1,r0,19  False    False         False
+12       ADD     ADD r3,r1,r2  False    False         False
+13       ADD     ADD r3,r3,r3  False    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   0   |
+|    r2    |   0   |
+|    r3    |   0   |
+|    r4    |   0   |
+|    r5    |   0   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  4 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add1 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           0           | Add2 | True | ADDI | 0  | 3  |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           2           | Add3 | True | ADDI | 0  | 9  |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+------+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj |  Qk  | A |
++---+-----------------------+------+------+-----+----+----+----+------+---+
+| 0 |          10           | Div  | True | DIV | 18 |    |    | Add2 |   |
++---+-----------------------+------+------+-----+----+----+----+------+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  5
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  ADDI
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True    False         False
+3       ADDI     ADDI r1,r0,9   True    False         False
+4       ADDI    ADDI r2,r0,10   True    False         False
+5       ADDI    ADDI r3,r0,11  False    False         False
+6       ADDI     ADDI r4,r1,2  False    False         False
+7       NAND    NAND r5,r1,r2  False    False         False
+8      STORE  STORE r5, 3(r0)  False    False         False
+9       LOAD   LOAD r6, 3(r0)  False    False         False
+10      LOAD   LOAD r6, 1(r0)  False    False         False
+11      ADDI    ADDI r1,r0,19  False    False         False
+12       ADD     ADD r3,r1,r2  False    False         False
+13       ADD     ADD r3,r3,r3  False    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   0   |
+|    r2    |   0   |
+|    r3    |   0   |
+|    r4    |   0   |
+|    r5    |   0   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  5 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           2           | Add1 | True | ADDI | 0  | 10 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add2 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           1           | Add3 | True | ADDI | 0  | 9  |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |          10           | Div  | True | DIV | 18 | 3  |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  6
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  ADDI
+Executing instruction:  None
+Executing instruction:  ADDI
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True    False         False
+3       ADDI     ADDI r1,r0,9   True     True         False
+4       ADDI    ADDI r2,r0,10   True    False         False
+5       ADDI    ADDI r3,r0,11   True    False         False
+6       ADDI     ADDI r4,r1,2  False    False         False
+7       NAND    NAND r5,r1,r2  False    False         False
+8      STORE  STORE r5, 3(r0)  False    False         False
+9       LOAD   LOAD r6, 3(r0)  False    False         False
+10      LOAD   LOAD r6, 1(r0)  False    False         False
+11      ADDI    ADDI r1,r0,19  False    False         False
+12       ADD     ADD r3,r1,r2  False    False         False
+13       ADD     ADD r3,r3,r3  False    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   0   |
+|    r2    |   0   |
+|    r3    |   0   |
+|    r4    |   0   |
+|    r5    |   0   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  6 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           1           | Add1 | True | ADDI | 0  | 10 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           2           | Add2 | True | ADDI | 0  | 11 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           0           | Add3 | True | ADDI | 0  | 9  |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           9           | Div  | True | DIV | 18 | 3  |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  7
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  ADDI
+Executing instruction:  ADDI
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True    False         False
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True         False
+5       ADDI    ADDI r3,r0,11   True    False         False
+6       ADDI     ADDI r4,r1,2  False    False         False
+7       NAND    NAND r5,r1,r2  False    False         False
+8      STORE  STORE r5, 3(r0)  False    False         False
+9       LOAD   LOAD r6, 3(r0)  False    False         False
+10      LOAD   LOAD r6, 1(r0)  False    False         False
+11      ADDI    ADDI r1,r0,19  False    False         False
+12       ADD     ADD r3,r1,r2  False    False         False
+13       ADD     ADD r3,r3,r3  False    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   9   |
+|    r2    |   0   |
+|    r3    |   0   |
+|    r4    |   0   |
+|    r5    |   0   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  7 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           0           | Add1 | True | ADDI | 0  | 10 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           1           | Add2 | True | ADDI | 0  | 11 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add3 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           8           | Div  | True | DIV | 18 | 3  |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  8
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  ADDI
+Executing instruction:  None
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True    False         False
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True         False
+6       ADDI     ADDI r4,r1,2   True    False         False
+7       NAND    NAND r5,r1,r2  False    False         False
+8      STORE  STORE r5, 3(r0)  False    False         False
+9       LOAD   LOAD r6, 3(r0)  False    False         False
+10      LOAD   LOAD r6, 1(r0)  False    False         False
+11      ADDI    ADDI r1,r0,19  False    False         False
+12       ADD     ADD r3,r1,r2  False    False         False
+13       ADD     ADD r3,r3,r3  False    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   9   |
+|    r2    |  10   |
+|    r3    |   0   |
+|    r4    |   0   |
+|    r5    |   0   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  8 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add1 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           0           | Add2 | True | ADDI | 0  | 11 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           2           | Add3 | True | ADDI | 9  | 2  |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           7           | Div  | True | DIV | 18 | 3  |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  9
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  ADDI
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True    False         False
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True    False         False
+7       NAND    NAND r5,r1,r2   True    False         False
+8      STORE  STORE r5, 3(r0)  False    False         False
+9       LOAD   LOAD r6, 3(r0)  False    False         False
+10      LOAD   LOAD r6, 1(r0)  False    False         False
+11      ADDI    ADDI r1,r0,19  False    False         False
+12       ADD     ADD r3,r1,r2  False    False         False
+13       ADD     ADD r3,r3,r3  False    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   9   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |   0   |
+|    r5    |   0   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  9 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add1 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add2 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           1           | Add3 | True | ADDI | 9  | 2  |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           6           | Div  | True | DIV | 18 | 3  |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           1           | Nand | True | NAND | 9  | 10 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  10
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  ADDI
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  NAND
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True    False         False
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True         False
+7       NAND    NAND r5,r1,r2   True     True         False
+8      STORE  STORE r5, 3(r0)   True    False         False
+9       LOAD   LOAD r6, 3(r0)  False    False         False
+10      LOAD   LOAD r6, 1(r0)  False    False         False
+11      ADDI    ADDI r1,r0,19  False    False         False
+12       ADD     ADD r3,r1,r2  False    False         False
+13       ADD     ADD r3,r3,r3  False    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   9   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |   0   |
+|    r5    |   0   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  10 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add1 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add2 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           0           | Add3 | True | ADDI | 9  | 2  |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           5           | Div  | True | DIV | 18 | 3  |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+------+-------+----+----+----+------+---+
+|   | Execution Cycles left |  Name  | Busy |  Op   | Vj | Vk | Qj |  Qk  | A |
++---+-----------------------+--------+------+-------+----+----+----+------+---+
+| 0 |           3           | Store1 | True | STORE | 0  |    |    | Nand | 3 |
++---+-----------------------+--------+------+-------+----+----+----+------+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           0           | Nand | True | NAND | 9  | 10 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  11
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True    False         False
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True         False
+8      STORE  STORE r5, 3(r0)   True    False         False
+9       LOAD   LOAD r6, 3(r0)   True    False         False
+10      LOAD   LOAD r6, 1(r0)  False    False         False
+11      ADDI    ADDI r1,r0,19  False    False         False
+12       ADD     ADD r3,r1,r2  False    False         False
+13       ADD     ADD r3,r3,r3  False    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   9   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |  11   |
+|    r5    |   0   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  11 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+------+------+----+----+----+----+---+
+| 0 |           3           | Load1 | True | LOAD | 0  |    |    |    | 3 |
++---+-----------------------+-------+------+------+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add1 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add2 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add3 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           4           | Div  | True | DIV | 18 | 3  |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+------+-------+----+----+----+------+---+
+|   | Execution Cycles left |  Name  | Busy |  Op   | Vj | Vk | Qj |  Qk  | A |
++---+-----------------------+--------+------+-------+----+----+----+------+---+
+| 0 |           3           | Store1 | True | STORE | 0  |    |    | Nand | 3 |
++---+-----------------------+--------+------+-------+----+----+----+------+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           0           | Nand | True | NAND | 9  | 10 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  12
+Executing instruction:  LOAD
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True    False         False
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True    False         False
+9       LOAD   LOAD r6, 3(r0)   True    False         False
+10      LOAD   LOAD r6, 1(r0)   True    False         False
+11      ADDI    ADDI r1,r0,19  False    False         False
+12       ADD     ADD r3,r1,r2  False    False         False
+13       ADD     ADD r3,r3,r3  False    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   9   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  12 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+------+------+----+----+----+----+---+
+| 0 |           2           | Load1 | True | LOAD | 0  |    |    |    | 3 |
++---+-----------------------+-------+------+------+----+----+----+----+---+
++---+-----------------------+-------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+------+------+----+----+----+----+---+
+| 0 |           3           | Load2 | True | LOAD | 0  |    |    |    | 1 |
++---+-----------------------+-------+------+------+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add1 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add2 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add3 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           3           | Div  | True | DIV | 18 | 3  |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+------+-------+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy |  Op   | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+------+-------+----+----+----+----+---+
+| 0 |           3           | Store1 | True | STORE | 0  | -9 |    |    | 3 |
++---+-----------------------+--------+------+-------+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  13
+Executing instruction:  LOAD
+Executing instruction:  LOAD
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  DIV
+Executing instruction:  STORE
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True    False         False
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True    False         False
+9       LOAD   LOAD r6, 3(r0)   True    False         False
+10      LOAD   LOAD r6, 1(r0)   True    False         False
+11      ADDI    ADDI r1,r0,19   True    False         False
+12       ADD     ADD r3,r1,r2  False    False         False
+13       ADD     ADD r3,r3,r3  False    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   9   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  13 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+------+------+----+----+----+----+---+
+| 0 |           1           | Load1 | True | LOAD | 0  |    |    |    | 3 |
++---+-----------------------+-------+------+------+----+----+----+----+---+
++---+-----------------------+-------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+------+------+----+----+----+----+---+
+| 0 |           2           | Load2 | True | LOAD | 0  |    |    |    | 1 |
++---+-----------------------+-------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           2           | Add1 | True | ADDI | 0  | 19 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add2 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add3 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           2           | Div  | True | DIV | 18 | 3  |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+------+-------+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy |  Op   | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+------+-------+----+----+----+----+---+
+| 0 |           2           | Store1 | True | STORE | 0  | -9 |    |    | 3 |
++---+-----------------------+--------+------+-------+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  14
+Executing instruction:  LOAD
+Executing instruction:  LOAD
+Executing instruction:  ADDI
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  DIV
+Executing instruction:  STORE
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True    False         False
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True    False         False
+9       LOAD   LOAD r6, 3(r0)   True     True         False
+10      LOAD   LOAD r6, 1(r0)   True    False         False
+11      ADDI    ADDI r1,r0,19   True    False         False
+12       ADD     ADD r3,r1,r2   True    False         False
+13       ADD     ADD r3,r3,r3  False    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   9   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  14 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+------+------+----+----+----+----+---+
+| 0 |           0           | Load1 | True | LOAD | 0  |    |    |    | 3 |
++---+-----------------------+-------+------+------+----+----+----+----+---+
++---+-----------------------+-------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+------+------+----+----+----+----+---+
+| 0 |           1           | Load2 | True | LOAD | 0  |    |    |    | 1 |
++---+-----------------------+-------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           1           | Add1 | True | ADDI | 0  | 19 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+------+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  | Qk | A |
++---+-----------------------+------+------+-----+----+----+------+----+---+
+| 0 |           2           | Add2 | True | ADD |    | 10 | Add1 |    |   |
++---+-----------------------+------+------+-----+----+----+------+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add3 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           1           | Div  | True | DIV | 18 | 3  |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+------+-------+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy |  Op   | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+------+-------+----+----+----+----+---+
+| 0 |           1           | Store1 | True | STORE | 0  | -9 |    |    | 3 |
++---+-----------------------+--------+------+-------+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  15
+Executing instruction:  LOAD
+Executing instruction:  ADDI
+Executing instruction:  None
+Executing instruction:  DIV
+Executing instruction:  STORE
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True         False
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True         False
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True         False
+11      ADDI    ADDI r1,r0,19   True     True         False
+12       ADD     ADD r3,r1,r2   True    False         False
+13       ADD     ADD r3,r3,r3   True    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   9   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  15 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+------+------+----+----+----+----+---+
+| 0 |           0           | Load2 | True | LOAD | 0  |    |    |    | 1 |
++---+-----------------------+-------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           0           | Add1 | True | ADDI | 0  | 19 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+------+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  | Qk | A |
++---+-----------------------+------+------+-----+----+----+------+----+---+
+| 0 |           2           | Add2 | True | ADD |    | 10 | Add1 |    |   |
++---+-----------------------+------+------+-----+----+----+------+----+---+
++---+-----------------------+------+------+-----+----+----+------+------+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  |  Qk  | A |
++---+-----------------------+------+------+-----+----+----+------+------+---+
+| 0 |           2           | Add3 | True | ADD |    |    | Add2 | Add2 |   |
++---+-----------------------+------+------+-----+----+----+------+------+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           0           | Div  | True | DIV | 18 | 3  |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+------+-------+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy |  Op   | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+------+-------+----+----+----+----+---+
+| 0 |           0           | Store1 | True | STORE | 0  | -9 |    |    | 3 |
++---+-----------------------+--------+------+-------+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  16
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True         False
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True         False
+11      ADDI    ADDI r1,r0,19   True     True         False
+12       ADD     ADD r3,r1,r2   True    False         False
+13       ADD     ADD r3,r3,r3   True    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   9   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  16 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+------+------+----+----+----+----+---+
+| 0 |           0           | Load2 | True | LOAD | 0  |    |    |    | 1 |
++---+-----------------------+-------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           0           | Add1 | True | ADDI | 0  | 19 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+------+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  | Qk | A |
++---+-----------------------+------+------+-----+----+----+------+----+---+
+| 0 |           2           | Add2 | True | ADD |    | 10 | Add1 |    |   |
++---+-----------------------+------+------+-----+----+----+------+----+---+
++---+-----------------------+------+------+-----+----+----+------+------+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  |  Qk  | A |
++---+-----------------------+------+------+-----+----+----+------+------+---+
+| 0 |           2           | Add3 | True | ADD |    |    | Add2 | Add2 |   |
++---+-----------------------+------+------+-----+----+----+------+------+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Div  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+------+-------+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy |  Op   | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+------+-------+----+----+----+----+---+
+| 0 |           0           | Store1 | True | STORE | 0  | -9 |    |    | 3 |
++---+-----------------------+--------+------+-------+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  17
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True          True
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True         False
+11      ADDI    ADDI r1,r0,19   True     True         False
+12       ADD     ADD r3,r1,r2   True    False         False
+13       ADD     ADD r3,r3,r3   True    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   9   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  17 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+------+------+----+----+----+----+---+
+| 0 |           0           | Load2 | True | LOAD | 0  |    |    |    | 1 |
++---+-----------------------+-------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           0           | Add1 | True | ADDI | 0  | 19 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+------+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  | Qk | A |
++---+-----------------------+------+------+-----+----+----+------+----+---+
+| 0 |           2           | Add2 | True | ADD |    | 10 | Add1 |    |   |
++---+-----------------------+------+------+-----+----+----+------+----+---+
++---+-----------------------+------+------+-----+----+----+------+------+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  |  Qk  | A |
++---+-----------------------+------+------+-----+----+----+------+------+---+
+| 0 |           2           | Add3 | True | ADD |    |    | Add2 | Add2 |   |
++---+-----------------------+------+------+-----+----+----+------+------+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Div  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  18
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True          True
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True          True
+11      ADDI    ADDI r1,r0,19   True     True         False
+12       ADD     ADD r3,r1,r2   True    False         False
+13       ADD     ADD r3,r3,r3   True    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |   9   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  18 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+------+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy |  Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+------+----+----+----+----+---+
+| 0 |           0           | Add1 | True | ADDI | 0  | 19 |    |    |   |
++---+-----------------------+------+------+------+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+------+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  | Qk | A |
++---+-----------------------+------+------+-----+----+----+------+----+---+
+| 0 |           2           | Add2 | True | ADD |    | 10 | Add1 |    |   |
++---+-----------------------+------+------+-----+----+----+------+----+---+
++---+-----------------------+------+------+-----+----+----+------+------+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  |  Qk  | A |
++---+-----------------------+------+------+-----+----+----+------+------+---+
+| 0 |           2           | Add3 | True | ADD |    |    | Add2 | Add2 |   |
++---+-----------------------+------+------+-----+----+----+------+------+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Div  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  19
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True          True
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True          True
+11      ADDI    ADDI r1,r0,19   True     True          True
+12       ADD     ADD r3,r1,r2   True    False         False
+13       ADD     ADD r3,r3,r3   True    False         False
+14       ADD     ADD r3,r3,r3  False    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |  19   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  19 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add1 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           2           | Add2 | True | ADD | 19 | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+------+------+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  |  Qk  | A |
++---+-----------------------+------+------+-----+----+----+------+------+---+
+| 0 |           2           | Add3 | True | ADD |    |    | Add2 | Add2 |   |
++---+-----------------------+------+------+-----+----+----+------+------+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Div  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  20
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  ADD
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True          True
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True          True
+11      ADDI    ADDI r1,r0,19   True     True          True
+12       ADD     ADD r3,r1,r2   True    False         False
+13       ADD     ADD r3,r3,r3   True    False         False
+14       ADD     ADD r3,r3,r3   True    False         False
+15       DIV     DIV r3,r6,r2  False    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |  19   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  20 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+------+------+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  |  Qk  | A |
++---+-----------------------+------+------+-----+----+----+------+------+---+
+| 0 |           2           | Add1 | True | ADD |    |    | Add3 | Add3 |   |
++---+-----------------------+------+------+-----+----+----+------+------+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           1           | Add2 | True | ADD | 19 | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+------+------+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  |  Qk  | A |
++---+-----------------------+------+------+-----+----+----+------+------+---+
+| 0 |           2           | Add3 | True | ADD |    |    | Add2 | Add2 |   |
++---+-----------------------+------+------+-----+----+----+------+------+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Div  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  21
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  ADD
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True          True
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True          True
+11      ADDI    ADDI r1,r0,19   True     True          True
+12       ADD     ADD r3,r1,r2   True     True         False
+13       ADD     ADD r3,r3,r3   True    False         False
+14       ADD     ADD r3,r3,r3   True    False         False
+15       DIV     DIV r3,r6,r2   True    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |  19   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  21 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+------+------+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  |  Qk  | A |
++---+-----------------------+------+------+-----+----+----+------+------+---+
+| 0 |           2           | Add1 | True | ADD |    |    | Add3 | Add3 |   |
++---+-----------------------+------+------+-----+----+----+------+------+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           0           | Add2 | True | ADD | 19 | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+------+------+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  |  Qk  | A |
++---+-----------------------+------+------+-----+----+----+------+------+---+
+| 0 |           2           | Add3 | True | ADD |    |    | Add2 | Add2 |   |
++---+-----------------------+------+------+-----+----+----+------+------+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |          10           | Div  | True | DIV | 0  | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  22
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True          True
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True          True
+11      ADDI    ADDI r1,r0,19   True     True          True
+12       ADD     ADD r3,r1,r2   True     True          True
+13       ADD     ADD r3,r3,r3   True    False         False
+14       ADD     ADD r3,r3,r3   True    False         False
+15       DIV     DIV r3,r6,r2   True    False         False
+16       ADD     ADD r3,r1,r2  False    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |  19   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  22 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+------+------+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  |  Qk  | A |
++---+-----------------------+------+------+-----+----+----+------+------+---+
+| 0 |           2           | Add1 | True | ADD |    |    | Add3 | Add3 |   |
++---+-----------------------+------+------+-----+----+----+------+------+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add2 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           2           | Add3 | True | ADD | 29 | 29 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           9           | Div  | True | DIV | 0  | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  23
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  ADD
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True          True
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True          True
+11      ADDI    ADDI r1,r0,19   True     True          True
+12       ADD     ADD r3,r1,r2   True     True          True
+13       ADD     ADD r3,r3,r3   True    False         False
+14       ADD     ADD r3,r3,r3   True    False         False
+15       DIV     DIV r3,r6,r2   True    False         False
+16       ADD     ADD r3,r1,r2   True    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |  19   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  23 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+------+------+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  |  Qk  | A |
++---+-----------------------+------+------+-----+----+----+------+------+---+
+| 0 |           2           | Add1 | True | ADD |    |    | Add3 | Add3 |   |
++---+-----------------------+------+------+-----+----+----+------+------+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           2           | Add2 | True | ADD | 19 | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           1           | Add3 | True | ADD | 29 | 29 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           8           | Div  | True | DIV | 0  | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  24
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  ADD
+Executing instruction:  ADD
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True          True
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True          True
+11      ADDI    ADDI r1,r0,19   True     True          True
+12       ADD     ADD r3,r1,r2   True     True          True
+13       ADD     ADD r3,r3,r3   True     True         False
+14       ADD     ADD r3,r3,r3   True    False         False
+15       DIV     DIV r3,r6,r2   True    False         False
+16       ADD     ADD r3,r1,r2   True    False         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |  19   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  24 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+------+------+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk |  Qj  |  Qk  | A |
++---+-----------------------+------+------+-----+----+----+------+------+---+
+| 0 |           2           | Add1 | True | ADD |    |    | Add3 | Add3 |   |
++---+-----------------------+------+------+-----+----+----+------+------+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           1           | Add2 | True | ADD | 19 | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           0           | Add3 | True | ADD | 29 | 29 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           7           | Div  | True | DIV | 0  | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  25
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  ADD
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True          True
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True          True
+11      ADDI    ADDI r1,r0,19   True     True          True
+12       ADD     ADD r3,r1,r2   True     True          True
+13       ADD     ADD r3,r3,r3   True     True          True
+14       ADD     ADD r3,r3,r3   True    False         False
+15       DIV     DIV r3,r6,r2   True    False         False
+16       ADD     ADD r3,r1,r2   True     True         False
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |  19   |
+|    r2    |  10   |
+|    r3    |  11   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  25 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           2           | Add1 | True | ADD | 58 | 58 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           0           | Add2 | True | ADD | 19 | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add3 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           6           | Div  | True | DIV | 0  | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  26
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  ADD
+Executing instruction:  None
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True          True
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True          True
+11      ADDI    ADDI r1,r0,19   True     True          True
+12       ADD     ADD r3,r1,r2   True     True          True
+13       ADD     ADD r3,r3,r3   True     True          True
+14       ADD     ADD r3,r3,r3   True    False         False
+15       DIV     DIV r3,r6,r2   True    False         False
+16       ADD     ADD r3,r1,r2   True     True          True
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |  19   |
+|    r2    |  10   |
+|    r3    |  29   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  26 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           1           | Add1 | True | ADD | 58 | 58 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add2 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add3 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           5           | Div  | True | DIV | 0  | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  27
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  ADD
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True          True
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True          True
+11      ADDI    ADDI r1,r0,19   True     True          True
+12       ADD     ADD r3,r1,r2   True     True          True
+13       ADD     ADD r3,r3,r3   True     True          True
+14       ADD     ADD r3,r3,r3   True     True         False
+15       DIV     DIV r3,r6,r2   True    False         False
+16       ADD     ADD r3,r1,r2   True     True          True
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |  19   |
+|    r2    |  10   |
+|    r3    |  29   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  27 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           0           | Add1 | True | ADD | 58 | 58 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add2 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add3 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           4           | Div  | True | DIV | 0  | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  28
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True          True
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True          True
+11      ADDI    ADDI r1,r0,19   True     True          True
+12       ADD     ADD r3,r1,r2   True     True          True
+13       ADD     ADD r3,r3,r3   True     True          True
+14       ADD     ADD r3,r3,r3   True     True          True
+15       DIV     DIV r3,r6,r2   True    False         False
+16       ADD     ADD r3,r1,r2   True     True          True
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |  19   |
+|    r2    |  10   |
+|    r3    |  29   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  28 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add1 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add2 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add3 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           3           | Div  | True | DIV | 0  | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  29
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True          True
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True          True
+11      ADDI    ADDI r1,r0,19   True     True          True
+12       ADD     ADD r3,r1,r2   True     True          True
+13       ADD     ADD r3,r3,r3   True     True          True
+14       ADD     ADD r3,r3,r3   True     True          True
+15       DIV     DIV r3,r6,r2   True    False         False
+16       ADD     ADD r3,r1,r2   True     True          True
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |  19   |
+|    r2    |  10   |
+|    r3    |  29   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  29 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add1 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add2 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add3 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           2           | Div  | True | DIV | 0  | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  30
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True          True
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True          True
+11      ADDI    ADDI r1,r0,19   True     True          True
+12       ADD     ADD r3,r1,r2   True     True          True
+13       ADD     ADD r3,r3,r3   True     True          True
+14       ADD     ADD r3,r3,r3   True     True          True
+15       DIV     DIV r3,r6,r2   True    False         False
+16       ADD     ADD r3,r1,r2   True     True          True
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |  19   |
+|    r2    |  10   |
+|    r3    |  29   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  30 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add1 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add2 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add3 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           1           | Div  | True | DIV | 0  | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  31
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  DIV
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True          True
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True          True
+11      ADDI    ADDI r1,r0,19   True     True          True
+12       ADD     ADD r3,r1,r2   True     True          True
+13       ADD     ADD r3,r3,r3   True     True          True
+14       ADD     ADD r3,r3,r3   True     True          True
+15       DIV     DIV r3,r6,r2   True     True         False
+16       ADD     ADD r3,r1,r2   True     True          True
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |  19   |
+|    r2    |  10   |
+|    r3    |  29   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  31 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add1 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add2 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add3 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+------+-----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy | Op  | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+------+-----+----+----+----+----+---+
+| 0 |           0           | Div  | True | DIV | 0  | 10 |    |    |   |
++---+-----------------------+------+------+-----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+Clock cycle:  32
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+Executing instruction:  None
+   Operation      Instruction  Issue  Execute  Write Result
+0       ADDI    ADDI r1,r0,18   True     True          True
+1       ADDI     ADDI r2,r0,3   True     True          True
+2        DIV     DIV r2,r1,r2   True     True          True
+3       ADDI     ADDI r1,r0,9   True     True          True
+4       ADDI    ADDI r2,r0,10   True     True          True
+5       ADDI    ADDI r3,r0,11   True     True          True
+6       ADDI     ADDI r4,r1,2   True     True          True
+7       NAND    NAND r5,r1,r2   True     True          True
+8      STORE  STORE r5, 3(r0)   True     True          True
+9       LOAD   LOAD r6, 3(r0)   True     True          True
+10      LOAD   LOAD r6, 1(r0)   True     True          True
+11      ADDI    ADDI r1,r0,19   True     True          True
+12       ADD     ADD r3,r1,r2   True     True          True
+13       ADD     ADD r3,r3,r3   True     True          True
+14       ADD     ADD r3,r3,r3   True     True          True
+15       DIV     DIV r3,r6,r2   True     True          True
+16       ADD     ADD r3,r1,r2   True     True          True
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |  19   |
+|    r2    |  10   |
+|    r3    |  29   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
+In clock cycle:  32 the stall execution is:  False
+The branch instruction index is:  None
+
+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load1 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Load2 | False |    |    |    |    |    |   |
++---+-----------------------+-------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add1 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add2 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Add3 | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Div  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store1 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |  Name  | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Store2 | False |    |    |    |    |    |   |
++---+-----------------------+--------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | BNE  | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left | Name | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Nand | False |    |    |    |    |    |   |
++---+-----------------------+------+-------+----+----+----+----+----+---+
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+|   | Execution Cycles left |   Name   | Busy  | Op | Vj | Vk | Qj | Qk | A |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
+| 0 |          nan          | Call/Ret | False |    |    |    |    |    |   |
++---+-----------------------+----------+-------+----+----+----+----+----+---+
++----------+-------+
+| Register | Value |
++----------+-------+
+|    r0    |   0   |
+|    r1    |  19   |
+|    r2    |  10   |
+|    r3    |  29   |
+|    r4    |  11   |
+|    r5    |  -9   |
+|    r6    |   0   |
+|    r7    |   0   |
++----------+-------+
