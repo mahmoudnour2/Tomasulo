@@ -81,7 +81,8 @@ class RegisterFile:
             cleared_reservation_stations_names_branch.append(station.df["Name"][0])
         for register,station in self.Register_status.items():
             if station in cleared_reservation_stations_names_branch:
-                self.Register_status[register]=state[register]
+                # self.Register_status[register]=state[register]
+                self.Register_status[register]=None
     
 
 class CommonDataBus:
