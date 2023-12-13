@@ -119,35 +119,24 @@ class ReservationStation:
             "Qk": None,
             "A": None    
         }
-        cycles= {
-            "Load1": 3,
-            "Load2": 3,
-            "Store1": 3,
-            "Store2": 3,
-            "Add1": 2,
-            "Add2": 2,
-            "Add3": 2,
-            "Div": 10,
-            "BNE": 1,
-            "Nand": 1,
-            "Call/Ret": 1,
-        }
         # cycles= {
-        #     "Load1": 2,
-        #     "Load2": 2,
+        #     "Load1": 3,
+        #     "Load2": 3,
         #     "Store1": 3,
         #     "Store2": 3,
         #     "Add1": 2,
         #     "Add2": 2,
         #     "Add3": 2,
-        #     "Div": 12,
+        #     "Div": 10,
         #     "BNE": 1,
-        #     "Nand": 6,
+        #     "Nand": 1,
         #     "Call/Ret": 1,
         # }
         self.df = pd.DataFrame([reservation_station])
         self.name=name
-        self.cycles_needed=cycles[name]
+    def set_cycles_needed(self, cycles):
+        self.cycles_needed=cycles[self.name]
+
     def can_issue(self):
         return (self.df["Busy"]==False).all()
     def issue_instr(self, instruction):
@@ -235,9 +224,11 @@ class ReservationStation:
             self.df["Op"]="RET"
             self.df["A"]=self.register_file.Register_values["r1"]
     def execute(self):
+        first_execution_cycle=False
+        finished=False
         if(self.df["Execution Cycles left"]!=0).all() and (self.df["Qk"][0]==None) and (self.df["Qj"][0]==None):
-            # if (self.df["Execution Cycles left"][0]!=None):
-                # print("Executing instruction: ", self.df["Op"][0])
+            if (self.df["Execution Cycles left"][0]==self.cycles_needed):
+                first_execution_cycle=True
             self.df["Execution Cycles left"]-=1
         if(self.df["Execution Cycles left"]==0).all():
             if (self.df["Op"] == "LOAD").all():
@@ -254,16 +245,17 @@ class ReservationStation:
                     raise ZeroDivisionError("Divide by zero error")
                 self.result=self.df["Vj"][0]//self.df["Vk"][0]
             if (self.df["Op"] == "NAND").all():
-                self.result=~(self.df["Vj"][0]&self.df["Vk"])[0]
+                self.result=~(self.df["Vj"]&self.df["Vk"])[0]
             if (self.df["Op"] == "BNE").all():
-                self.result=self.df["A"][0]
+                self.result=int(self.df["A"][0])
             if (self.df["Op"] == "CALL").all():
-                self.result=self.df["A"][0]
+                self.result=int(self.df["A"][0])
             if (self.df["Op"] == "RET").all():
                 self.result=self.df["A"][0]
         if((self.df["Op"]=="LOAD").all() or (self.df["Op"]=="STORE").all()) and self.df["Execution Cycles left"][0]==self.cycles_needed-1:
             self.df["A"]=int(self.df["A"][0]+self.df["Vj"][0])
-        return (self.df["Execution Cycles left"]==0).all()
+        finished=(self.df["Execution Cycles left"]==0).all()
+        return finished,first_execution_cycle
     
     def write_result(self, issue_index):
         branch=False
@@ -380,3 +372,7 @@ class InstructionsTable:
         return self.instructions_written
     def check_all_before_branch_finished(self,index):
         return (self.df["Write Result"][0:index]==True).all()
+    def clear_some_instructions(self,begin_index,end_index):
+        self.df.loc[begin_index:end_index,"Issue"]=False
+        self.df.loc[begin_index:end_index,"Execute"]=False
+        self.df.loc[begin_index:end_index,"Write Result"]=False

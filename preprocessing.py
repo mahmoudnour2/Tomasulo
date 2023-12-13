@@ -28,3 +28,16 @@ def get_instruction_queue(file_path):
     }
     instructions_queue = pd.DataFrame(instructions_queue)
     return instructions_queue
+def get_instructions_timing_table(file_path):
+    
+    instructions = read_program(file_path)
+    my_range = len(instructions)
+    instructions_timing_table = {
+        "Instruction": instructions,
+        "Issue": [0 for i in range(my_range)],
+        "Begin Execute": [0 for i in range(my_range)],
+        "End Execute": [0 for i in range(my_range)],
+        "Write": [0 for i in range(my_range)]
+    }
+    instructions_timing_table = pd.DataFrame(instructions_timing_table)
+    return instructions_timing_table
