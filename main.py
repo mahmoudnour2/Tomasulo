@@ -225,16 +225,14 @@ def algorithm(number_of_units,number_of_cycles, program_path, data_path):
                     print("Waiting for instructions before branch to finish")
                     continue
                 branch_offset=cdb.get_value()
-                bne_station=Reservation_stations[8]
-                index_of_branch_instruction=reservation_station_to_instruction_map[bne_station]
                 target_index=branch_instr_index+branch_offset+1
-                if target_index<index_of_branch_instruction:
+                if target_index<branch_instr_index:
                     branch_backwards=True
-                    instruction_table.clear_some_instructions(target_index,index_of_branch_instruction)
+                    instruction_table.clear_some_instructions(target_index,branch_instr_index)
                 skipped_instructions+=(target_index-branch_instr_index-1)
-
+                
                 cleared_reservation_stations=[]
-                #flush instructions after branch (from index_of_branch_instruction+1 to the current index)
+                #flush instructions after branch (from branch_instr_index+1 to the current index)
                 #flush= clear corresponding reservation stations and register status and update the instruction table
                 #update the PC (issue_index) to the branch instruction's PC + branch_offset + 1
                 
